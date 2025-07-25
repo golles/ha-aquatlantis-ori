@@ -1,0 +1,28 @@
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+history:
+
+http:
+  trusted_proxies:
+    - 127.0.0.1
+    - ::1
+  use_x_forwarded_for: true
+
+logbook:
+
+lovelace:
+  mode: storage
+  dashboards:
+    lovelace-demo:
+      mode: yaml
+      title: Aquarium
+      icon: mdi:fishbowl
+      show_in_sidebar: true
+      filename: lovelace-demo.yaml
+
+logger:
+  default: warn
+  logs:
+    aquatlantis_ori: debug
+    custom_components.ori: debug

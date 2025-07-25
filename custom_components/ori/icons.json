@@ -1,0 +1,11 @@
+{
+  "entity": {
+    "sensor": {
+      "bluetooth_mac": { "default": "mdi:bluetooth" },
+      "ip": { "default": "mdi:ip-network" },
+      "mac": { "default": "mdi:wifi" },
+      "ssid": { "default": "mdi:wifi" },
+      "version": { "default": "mdi:new-box" }
+    }
+  }
+}

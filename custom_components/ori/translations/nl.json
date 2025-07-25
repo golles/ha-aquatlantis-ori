@@ -1,0 +1,148 @@
+{
+  "title": "Aquatlantis Ori",
+  "config": {
+    "step": {
+      "user": {
+        "description": "Geef je Aquatlantis Ori-accountgegevens op om de integratie te verbinden.",
+        "data": {
+          "email": "E-mail",
+          "password": "Wachtwoord"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan geen verbinding maken met Aquatlantis Ori. Controleer je netwerkverbinding en probeer het opnieuw.",
+      "invalid_auth": "Inloggen mislukt. Controleer je e-mailadres en wachtwoord.",
+      "timeout": "Verbindingstijd verstreken. Controleer je netwerkverbinding en probeer het opnieuw.",
+      "unknown_error": "Er is een onbekende fout opgetreden. Probeer het later opnieuw."
+    },
+    "abort": {
+      "already_configured": "Al geconfigureerd. Verwijder de bestaande integratie voordat je een nieuwe toevoegt.",
+      "reconfigure_successful": "Herconfiguratie geslaagd."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "water_temperature_problem": {
+        "name": "Watertemperatuur",
+        "state_attributes": {
+          "water_temperature": { "name": "Watertemperatuur" },
+          "min_value": { "name": "Min waarde" },
+          "max_value": { "name": "Max waarde" },
+          "app_notifications": { "name": "App-meldingen" }
+        }
+      }
+    },
+    "button": {
+      "custom1": {
+        "name": "Preset 1",
+        "state_attributes": {
+          "intensity": { "name": "Intensiteit" },
+          "red": { "name": "Rood" },
+          "green": { "name": "Groen" },
+          "blue": { "name": "Blauw" },
+          "white": { "name": "Wit" }
+        }
+      },
+      "custom2": {
+        "name": "Preset 2",
+        "state_attributes": {
+          "intensity": { "name": "Intensiteit" },
+          "red": { "name": "Rood" },
+          "green": { "name": "Groen" },
+          "blue": { "name": "Blauw" },
+          "white": { "name": "Wit" }
+        }
+      },
+      "custom3": {
+        "name": "Preset 3",
+        "state_attributes": {
+          "intensity": { "name": "Intensiteit" },
+          "red": { "name": "Rood" },
+          "green": { "name": "Groen" },
+          "blue": { "name": "Blauw" },
+          "white": { "name": "Wit" }
+        }
+      },
+      "custom4": {
+        "name": "Preset 4",
+        "state_attributes": {
+          "intensity": { "name": "Intensiteit" },
+          "red": { "name": "Rood" },
+          "green": { "name": "Groen" },
+          "blue": { "name": "Blauw" },
+          "white": { "name": "Wit" }
+        }
+      }
+    },
+    "light": {
+      "light": {
+        "name": "Licht"
+      }
+    },
+    "number": {
+      "blue": {
+        "name": "Blauw"
+      },
+      "green": {
+        "name": "Groen"
+      },
+      "intensity": {
+        "name": "Intensiteit"
+      },
+      "red": {
+        "name": "Rood"
+      },
+      "white": {
+        "name": "Wit"
+      }
+    },
+    "select": {
+      "dynamic_mode": {
+        "name": "Dynamische modus",
+        "state": {
+          "ON": "Aan",
+          "OFF": "Uit"
+        }
+      },
+      "mode": {
+        "name": "Lichtmodus",
+        "state": {
+          "MANUAL": "Handmatig",
+          "AUTOMATIC": "Automatisch"
+        }
+      }
+    },
+    "sensor": {
+      "bluetooth_mac": {
+        "name": "Bluetooth MAC-adres"
+      },
+      "ip": {
+        "name": "IP-adres"
+      },
+      "mac": {
+        "name": "Wifi MAC-adres"
+      },
+      "rssi": {
+        "name": "Wifi-signaal"
+      },
+      "ssid": {
+        "name": "SSID"
+      },
+      "uptime": {
+        "name": "Uptime"
+      },
+      "water_temperature": {
+        "name": "Watertemperatuur"
+      }
+    },
+    "update": {
+      "firmware": {
+        "state_attributes": {
+          "filename": { "name": "Bestandsnaam" },
+          "download_url": { "name": "Download URL" }
+        }
+      }
+    }
+  }
+}

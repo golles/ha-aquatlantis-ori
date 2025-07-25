@@ -1,0 +1,148 @@
+{
+  "title": "Aquatlantis Ori",
+  "config": {
+    "step": {
+      "user": {
+        "description": "Provide your Aquatlantis Ori account details to connect the integration.",
+        "data": {
+          "email": "E-mail",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to Aquatlantis Ori. Please check your network connection and try again.",
+      "invalid_auth": "Login failed. Please check your email and password.",
+      "timeout": "Connection timed out. Please check your network connection and try again.",
+      "unknown_error": "An unknown error occurred. Please try again later."
+    },
+    "abort": {
+      "already_configured": "Already configured. Please remove the existing integration before adding a new one.",
+      "reconfigure_successful": "Reconfiguration successful."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "water_temperature_problem": {
+        "name": "Water temperature",
+        "state_attributes": {
+          "water_temperature": { "name": "Water temperature" },
+          "min_value": { "name": "Min value" },
+          "max_value": { "name": "Max value" },
+          "app_notifications": { "name": "App notifications" }
+        }
+      }
+    },
+    "button": {
+      "custom1": {
+        "name": "Preset 1",
+        "state_attributes": {
+          "intensity": { "name": "Intensity" },
+          "red": { "name": "Red" },
+          "green": { "name": "Green" },
+          "blue": { "name": "Blue" },
+          "white": { "name": "White" }
+        }
+      },
+      "custom2": {
+        "name": "Preset 2",
+        "state_attributes": {
+          "intensity": { "name": "Intensity" },
+          "red": { "name": "Red" },
+          "green": { "name": "Green" },
+          "blue": { "name": "Blue" },
+          "white": { "name": "White" }
+        }
+      },
+      "custom3": {
+        "name": "Preset 3",
+        "state_attributes": {
+          "intensity": { "name": "Intensity" },
+          "red": { "name": "Red" },
+          "green": { "name": "Green" },
+          "blue": { "name": "Blue" },
+          "white": { "name": "White" }
+        }
+      },
+      "custom4": {
+        "name": "Preset 4",
+        "state_attributes": {
+          "intensity": { "name": "Intensity" },
+          "red": { "name": "Red" },
+          "green": { "name": "Green" },
+          "blue": { "name": "Blue" },
+          "white": { "name": "White" }
+        }
+      }
+    },
+    "light": {
+      "light": {
+        "name": "Light"
+      }
+    },
+    "number": {
+      "blue": {
+        "name": "Blue"
+      },
+      "green": {
+        "name": "Green"
+      },
+      "intensity": {
+        "name": "Intensity"
+      },
+      "red": {
+        "name": "Red"
+      },
+      "white": {
+        "name": "White"
+      }
+    },
+    "select": {
+      "dynamic_mode": {
+        "name": "Dynamic mode",
+        "state": {
+          "ON": "On",
+          "OFF": "Off"
+        }
+      },
+      "mode": {
+        "name": "Light mode",
+        "state": {
+          "MANUAL": "Manual",
+          "AUTOMATIC": "Automatic"
+        }
+      }
+    },
+    "sensor": {
+      "bluetooth_mac": {
+        "name": "Bluetooth mac address"
+      },
+      "ip": {
+        "name": "IP address"
+      },
+      "mac": {
+        "name": "Wifi mac address"
+      },
+      "rssi": {
+        "name": "Wifi signal"
+      },
+      "ssid": {
+        "name": "SSID"
+      },
+      "uptime": {
+        "name": "Uptime"
+      },
+      "water_temperature": {
+        "name": "Water temperature"
+      }
+    },
+    "update": {
+      "firmware": {
+        "state_attributes": {
+          "filename": { "name": "Filename" },
+          "download_url": { "name": "Download URL" }
+        }
+      }
+    }
+  }
+}

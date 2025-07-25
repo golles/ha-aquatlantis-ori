@@ -1,0 +1,39 @@
+name: Release
+
+on: # yamllint disable-line rule:truthy
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out code from GitHub
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+
+      - name: Set integration version
+        run: |
+          version="${{ github.event.release.tag_name }}"
+          version=${version#v}
+          sed -i -E 's/"version": *"[^"]+"/"version": "'"$version"'"/' custom_components/ori/manifest.json
+
+      - name: Create archive
+        shell: bash
+        run: |
+          cd "${{ github.workspace }}/custom_components/ori"
+          zip -r "${{ github.workspace }}/ori.zip" ./*
+
+      - name: Upload release artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ori.zip
