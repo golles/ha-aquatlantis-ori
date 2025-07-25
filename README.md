@@ -69,7 +69,7 @@ The light entity can be controlled using the below action, like any light in Hom
 ```yaml
 action: light.turn_on
 target:
-  entity_id: light.keuken
+  entity_id: light.aquarium_light
 data:
   brightness_pct: 80
   rgbw_color:
