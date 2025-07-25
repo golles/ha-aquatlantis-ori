@@ -23,10 +23,22 @@
       "rangeStrategy": "pin"
     },
     {
+      "description": "Javascript dependencies ignore node engine",
+      "matchManagers": ["npm"],
+      "matchDepNames": ["node"],
+      "enabled": false
+    },
+    {
       "description": "Javascript dependencies",
       "matchManagers": ["npm"],
       "addLabels": ["javascript"],
       "rangeStrategy": "pin"
+    },
+    {
+      "description": "Let pytest-homeassistant-custom-component control pytest deps",
+      "matchManagers": ["pep621"],
+      "matchPackageNames": ["pytest", "pytest-asyncio", "pytest-cov"],
+      "enabled": false
     },
     {
       "description": "Python dependencies",
