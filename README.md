@@ -36,7 +36,7 @@ The most convenient method for installing this custom component is via HACS. Sim
 
 Within the HA user interface, navigate to "Configuration" -> "Integrations", click the "+" button, and search for "Aquatlantis Ori" to add the integration.
 
-### Sensors
+## Sensors
 
 ![Demo dashboard](/img/demo_dashboard.png)
 
