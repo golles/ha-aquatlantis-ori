@@ -26,8 +26,8 @@ async def test_select(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock) -
 
     config_entry = await setup_integration(hass)
 
-    check_state_value(hass, "select.test_device_dynamic_mode", "OFF")
-    check_state_value(hass, "select.test_device_light_mode", "MANUAL")
+    check_state_value(hass, "select.test_device_dynamic_mode", "off")
+    check_state_value(hass, "select.test_device_light_mode", "manual")
 
     await unload_integration(hass, config_entry)
 
@@ -56,7 +56,7 @@ async def test_select_select(hass: HomeAssistant, mock_aquatlantis_client: Async
         await hass.services.async_call(
             SELECT_DOMAIN,
             SERVICE_SELECT_OPTION,
-            {ATTR_ENTITY_ID: "select.test_device_dynamic_mode", ATTR_OPTION: "ON"},
+            {ATTR_ENTITY_ID: "select.test_device_dynamic_mode", ATTR_OPTION: "on"},
             blocking=True,
         )
         await hass.async_block_till_done()
