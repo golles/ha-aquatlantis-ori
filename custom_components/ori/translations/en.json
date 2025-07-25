@@ -101,15 +101,15 @@
       "dynamic_mode": {
         "name": "Dynamic mode",
         "state": {
-          "ON": "On",
-          "OFF": "Off"
+          "on": "On",
+          "off": "Off"
         }
       },
       "mode": {
         "name": "Light mode",
         "state": {
-          "MANUAL": "Manual",
-          "AUTOMATIC": "Automatic"
+          "manual": "Manual",
+          "automatic": "Automatic"
         }
       }
     },

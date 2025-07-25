@@ -33,17 +33,17 @@ DESCRIPTIONS: list[OriSelectEntityDescription] = [
     OriSelectEntityDescription(
         key="dynamic_mode",
         translation_key="dynamic_mode",
-        options=[item.name for item in DynamicModeType],
-        value_fn=lambda device: DynamicModeType(device.dynamic_mode).name if device.dynamic_mode is not None else None,
-        set_fn=lambda device, value: device.set_dynamic_mode(DynamicModeType[value]),
+        options=[item.name.lower() for item in DynamicModeType],
+        value_fn=lambda device: DynamicModeType(device.dynamic_mode).name.lower() if device.dynamic_mode is not None else None,
+        set_fn=lambda device, value: device.set_dynamic_mode(DynamicModeType[value.upper()]),
         available_fn=lambda device: device.mode == ModeType.MANUAL,
     ),
     OriSelectEntityDescription(
         key="mode",
         translation_key="mode",
-        options=[item.name for item in ModeType],
-        value_fn=lambda device: ModeType(device.mode).name if device.mode is not None else None,
-        set_fn=lambda device, value: device.set_mode(ModeType[value]),
+        options=[item.name.lower() for item in ModeType],
+        value_fn=lambda device: ModeType(device.mode).name.lower() if device.mode is not None else None,
+        set_fn=lambda device, value: device.set_mode(ModeType[value.upper()]),
     ),
 ]
 

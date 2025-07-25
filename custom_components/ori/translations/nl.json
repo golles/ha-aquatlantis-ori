@@ -101,15 +101,15 @@
       "dynamic_mode": {
         "name": "Dynamische modus",
         "state": {
-          "ON": "Aan",
-          "OFF": "Uit"
+          "on": "Aan",
+          "off": "Uit"
         }
       },
       "mode": {
         "name": "Lichtmodus",
         "state": {
-          "MANUAL": "Handmatig",
-          "AUTOMATIC": "Automatisch"
+          "manual": "Handmatig",
+          "automatic": "Automatisch"
         }
       }
     },
