@@ -1,4 +1,4 @@
-# Aquatlantis Ori
+# Aquatlantis Ori Integration for Home Assistant
 
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Repo stars][stars-shield]][stars]
@@ -10,138 +10,211 @@
 [![Project Maintenance][maintenance-shield]][maintainer]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
-Aquatlantis Ori custom component for Home Assistant.
+A Home Assistant custom integration for controlling Aquatlantis Ori smart controllers. Monitor sensors, and control lighting.
 
 > [!CAUTION]
 > This project is a personal, unofficial effort and is not affiliated with Aquatlantis. It was created to learn and experiment with controlling my own aquarium.
 > The Ori API was reverse-engineered for this purpose, and functionality may break at any time if Aquatlantis changes their API.
 > I'm not responsible for any damage or issues that may arise from using this client. Use at your own risk!
 
+## Supported Devices
+
+This integration supports the **Aquatlantis Ori smart controller** and its compatible accessories.
+
+### Light Compatibility
+
+| Light Type | Status              | Notes                            |
+| ---------- | ------------------- | -------------------------------- |
+| RGBW Ultra | ✅ Fully Supported  | Complete RGBW control            |
+| Easy LED   | ⚠️ Likely Supported | Should work but not fully tested |
+| UV Ultra   | ❌ Not Supported    | Currently not compatible         |
+
+### Sensor Compatibility
+
+| Sensor Type              | Status           | Notes                        |
+| ------------------------ | ---------------- | ---------------------------- |
+| No sensor                | ✅ Supported     | Basic light control          |
+| Temperature sensor       | ✅ Supported     | Water temperature monitoring |
+| Air temperature/humidity | ❌ Not Supported | Currently not compatible     |
+
+> [!TIP]
+> If you own a device that isn't fully supported, please [open an issue](https://github.com/golles/ha-aquatlantis-ori/issues) and let me know. With your help, I will try to add support for it.
+
 ## Installation
 
-### HACS installation
+### Method 1: HACS (Recommended)
 
-The most convenient method for installing this custom component is via HACS. Simply search for the name, and you should be able to locate and install it seamlessly.
+1. Open HACS in your Home Assistant instance
+2. Go to "Integrations"
+3. Click the "+" button
+4. Search for "Aquatlantis Ori"
+5. Click "Download" and restart Home Assistant
 
-### Manual installation guide:
+### Method 2: Manual Installation
 
-1. Utilize your preferred tool to access the directory in your Home Assistant (HA) configuration, where you can locate the `configuration.yaml` file.
-2. Should there be no existing `custom_components` directory, you must create one.
-3. Inside the newly created `custom_components` directory, generate a new directory named `ori`.
-4. Retrieve and download all files from the `custom_components/ori/` directory in this repository.
-5. Place the downloaded files into the newly created `ori` directory.
-6. Restart Home Assistant.
+1. Download the latest release from [GitHub releases](https://github.com/golles/ha-aquatlantis-ori/releases)
+2. Extract the files to your Home Assistant `custom_components` directory:
+   ```
+   config/
+   └── custom_components/
+       └── ori/
+           ├── __init__.py
+           ├── manifest.json
+           └── ... (all other files)
+   ```
+3. Restart Home Assistant
 
-## Configuration is done in the UI
+## Configuration
 
-Within the HA user interface, navigate to "Configuration" -> "Integrations", click the "+" button, and search for "Aquatlantis Ori" to add the integration.
+Configuration is done entirely through the Home Assistant UI - no YAML editing required!
 
-## Sensors
+### Quick Start
+
+1. Go to **Settings** → **Devices & Services**
+2. Click **"+ Add Integration"**
+3. Search for **"Aquatlantis Ori"**
+4. Follow the setup wizard to connect your device
+
+The integration will automatically discover and configure all available entities based on your Ori device's capabilities.
 
 ![Demo dashboard](/img/demo_dashboard.png)
 
-### Binary Sensors
+## Available Entities
 
-**Status**
+Once configured, the integration provides various entities to monitor and control your aquarium:
 
-The status sensor indicates whether the device is online or offline, it takes around 5 minutes before it is detected as offline.
+### Light Entity
 
-**Water temperature**
+The main light control entity with full RGBW support and brightness control.
 
-The water temperature sensor (problem) is based on the water temperature thresholds set in the Aquatlantis Ori app. If the water temperature exceeds the maximum or falls below the minimum threshold, it will be marked as a problem sensor. The attributes of this sensor include the current water temperature, the minimum and maximum values, and whether Ori app notifications are enabled. Note that this sensor is only available when a temperature sensor is connected to the Ori device.
+- **Features**: On/off, brightness (0-100%), RGBW colors (0-255 each)
+- **Modes**:
+  - On/off only when automatic or dynamic mode is enabled
+  - RGBW when manual mode is selected
 
-### Buttons
+### Button Entities
 
-These are the presets that can be set in the Aquatlantis Ori app. They can be used to quickly set the light to a specific color.
+**Preset Buttons (1-4)**
 
-**Preset [1-4]**
+Quick-access buttons for your saved color presets from the Ori app.
 
-These buttons allow you to set the aquarium light to predefined color presets. Each preset corresponds to a specific RGBW color configuration, which can be customized in the Aquatlantis Ori app. The attributes of each preset include the red, green, blue, and white values of the preset.
+- Only active in manual mode with dynamic mode disabled
+- Each button contains RGBW values in attributes
+- Instantly applies the preset when pressed
 
-Note that these buttons will only change the light when the light mode is set to manual and when dynamic mode is disabled. You can use these buttons to change the values and they will be applied when the light mode is set to manual.
+### Control Entities
 
-### Light
+**Light Mode Select** - Switch between manual and automatic light control
 
-The light entity represents the aquarium light and can be controlled through Home Assistant. It supports brightness and RGBW color settings.
+**Dynamic Mode Select** - Enable/disable lightning effects
 
-The light entity can be controlled using the below action, like any light in Home Assistant. The RGBW values are represented as a list of four integers, where each integer corresponds to the red, green, blue, and white colors (0-255). The intensity can be set as brightness percentage (0-100).
+**Manual Controls** - Individual intensity and RGBW number entities (disabled by default)
+
+### Sensor Entities
+
+#### Core Sensors
+
+- **Device Status** (binary) - Online/offline detection (~5 min delay)
+- **Water Temperature** - Current temperature reading (5-min updates)
+- **Water Temperature Problem** (binary) - Temperature threshold alerts
+
+#### Diagnostic Sensors (disabled by default)
+
+- **Bluetooth MAC Address** - Device identifier
+- **IP Address** - Network location with port in attributes
+- **WiFi Signal Strength** - Connection quality
+- **SSID** - Connected network name
+- **Uptime** - Device runtime
+
+### Update Entity
+
+**Firmware Update**
+
+- Automatic firmware update detection
+- Download URL and filename in attributes
+- Update through Ori app (not directly through HA)
+
+## Usage Examples
+
+### Basic Light Control
+
+Control your light like any other Home Assistant light:
 
 ```yaml
+# Turn on with warm white at 80% brightness
 action: light.turn_on
 target:
   entity_id: light.aquarium_light
 data:
   brightness_pct: 80
-  rgbw_color:
-    - 0
-    - 0
-    - 0
-    - 255
+  rgbw_color: [0, 0, 0, 255]  # Pure white
+
+# Set custom color (purple)
+action: light.turn_on
+target:
+  entity_id: light.aquarium_light
+data:
+  brightness_pct: 60
+  rgbw_color: [128, 0, 128, 0]  # Purple
+
+# Turn off the light
+action: light.turn_off
+target:
+  entity_id: light.aquarium_light
 ```
 
-Note that the light entity will only support on/off when automatic mode or dynamic mode is enabled. When manual mode is enabled and dynamic mode is disabled, the light entity will support brightness and RGBW color settings.
+### Automation Examples
 
-### Numbers
+```yaml
+# Turn on aquarium light at sunrise
+automation:
+  - alias: "Aquarium Morning Light"
+    trigger:
+      platform: sun
+      event: sunrise
+    action:
+      - action: select.select_option
+        target:
+          entity_id: select.aquarium_light_mode
+        data:
+          option: "manual"
+      - action: light.turn_on
+        target:
+          entity_id: light.aquarium_light
+        data:
+          brightness_pct: 30
+          rgbw_color: [255, 100, 50, 100]  # Warm sunrise colors
 
-**Intensity/Red/Green/Blue/White**
+# Alert when water temperature is too high
+automation:
+  - alias: "Aquarium Temperature Alert"
+    trigger:
+      platform: state
+      entity_id: binary_sensor.aquarium_water_temperature_problem
+      to: "on"
+    action:
+      - action: notify.mobile_app_your_phone
+        data:
+          title: "Aquarium Alert"
+          message: "Water temperature is outside normal range!"
+```
 
-These numbers represent the intensity and RGBW values of the light. They can be used to set the color of the light in Home Assistant.
-Since it is suggested to control the light through the light entity, these numbers are disabled by default.
+## Troubleshooting
 
-Note that these numbers will only be available when the light mode is set to manual and when dynamic mode is disabled.
+### Debug Logging
 
-### Selects
+To collect detailed logs for troubleshooting:
 
-**Dynamic mode**
+#### Method 1: Integration Debug (Recommended)
 
-This controls the dynamic mode. The dynamic mode is also known as the lightning effect, which can be turned on or off.
+1. Go to **Settings** → **Devices & Services** → **Aquatlantis Ori**
+2. Click **"Enable debug logging"**
+3. Reproduce the issue
+4. Click **"Stop debug logging"** to download the log file
 
-**Light mode**
+#### Method 2: Logger Configuration
 
-This controls the light mode. The light mode can be set to manual or automatic. In manual mode, you can control the light using the light entity (or the numbers), while in automatic mode, the light will follow the settings defined in the Aquatlantis Ori app.
-
-### Sensors
-
-**Bluetooth mac address**
-
-Diagnostic sensor that provides the Bluetooth MAC address of the Ori device, disabled by default.
-
-**IP address**
-
-Diagnostic sensor that provides the IP address and port (attribute) of the Ori device, disabled by default.
-
-**Wifi signal**
-
-Diagnostic sensor that provides the Wifi signal strength of the Ori device, disabled by default.
-
-**SSID**
-
-Diagnostic sensor that provides the SSID of the Wifi network the Ori device is connected to, disabled by default.
-
-**Uptime**
-
-Diagnostic sensor that provides the uptime of the Ori device, disabled by default.
-
-**Water temperature**
-
-Sensor that provides the current temperature reading from the Ori device. The temperature is updated every 5 minutes. Note that this sensor is only available when a temperature sensor is connected to the Ori device.
-
-### Update
-
-**Firmware**
-
-The integration will automatically check for firmware updates and notify you if a new version is available. You can then update the firmware in the Aquatlantis app. Latest firmware filename and download URL are available in the attributes.
-
-## Collect logs
-
-To activate the debug log necessary for issue reporting, follow these steps:
-
-1. Go to "Configuration" -> "Integrations" -> "Aquatlantis Ori" within the Home Assistant interface.
-2. On the left side, locate the "Enable debug logging" button and click on it.
-3. Once you collected enough information, Stop debug logging, this will download the log file as well.
-4. Share the log file in an issue.
-
-Additionally, logging for this component can be enabled by configuring the logger in Home Assistant with the following steps:
+Add this to your `configuration.yaml`:
 
 ```yaml
 logger:
@@ -151,11 +224,27 @@ logger:
     custom_components.ori: debug
 ```
 
-More info can be found on the [Home Assistant logger integration page](https://www.home-assistant.io/integrations/logger)
+More information: [Home Assistant Logger Integration](https://www.home-assistant.io/integrations/logger)
 
-## Contributions are welcome!
+### Getting Help
 
-If you want to contribute to this please read the [Contribution guidelines](CONTRIBUTING.md)
+1. Check the [existing issues](https://github.com/golles/ha-aquatlantis-ori/issues) first
+2. If you find a new issue, [create a detailed bug report](https://github.com/golles/ha-aquatlantis-ori/issues/new)
+3. Include debug logs and your device model information
+
+## Contributing
+
+Contributions are welcome! This project is open source and benefits from community involvement.
+
+### How to Contribute
+
+1. **Report Issues**: Found a bug or have a feature request? [Open an issue](https://github.com/golles/ha-aquatlantis-ori/issues)
+2. **Code Contributions**: Check the [Contribution Guidelines](CONTRIBUTING.md) for development setup
+3. **Device Support**: Help expand device compatibility by testing with your hardware
+
+### Development
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development setup instructions.
 
 [buymecoffee]: https://www.buymeacoffee.com/golles
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
