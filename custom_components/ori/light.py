@@ -27,6 +27,16 @@ PARALLEL_UPDATES = 0
 SCAN_INTERVAL = timedelta(seconds=2)
 
 
+def _convert_255_to_100(value: int) -> int:
+    """Convert value from 0-255 range to 0-100 range."""
+    return round((value * 100) / 255)
+
+
+def _convert_100_to_255(value: int) -> int:
+    """Convert value from 0-100 range to 0-255 range."""
+    return round((value * 255) / 100)
+
+
 @dataclass(kw_only=True, frozen=True)
 class OriLightEntityDescription(OriEntityDescription, LightEntityDescription):
     """Class describing Aquatlantis Ori light entities."""
@@ -78,12 +88,12 @@ class OriLightEntity(OriEntity, LightEntity):
 
         if ATTR_RGBW_COLOR in kwargs:
             rgbw = kwargs[ATTR_RGBW_COLOR]
-            options.red = int((rgbw[0] * 100) / 255)
-            options.green = int((rgbw[1] * 100) / 255)
-            options.blue = int((rgbw[2] * 100) / 255)
-            options.white = int((rgbw[3] * 100) / 255)
+            options.red = _convert_255_to_100(rgbw[0])
+            options.green = _convert_255_to_100(rgbw[1])
+            options.blue = _convert_255_to_100(rgbw[2])
+            options.white = _convert_255_to_100(rgbw[3])
         if ATTR_BRIGHTNESS in kwargs:
-            options.intensity = int((kwargs.get(ATTR_BRIGHTNESS, 0) * 100) / 255)
+            options.intensity = _convert_255_to_100(kwargs.get(ATTR_BRIGHTNESS, 0))
 
         self._device.set_light(PowerType.ON, options)
 
@@ -118,7 +128,7 @@ class OriLightEntity(OriEntity, LightEntity):
         """Return the brightness of the light."""
         intensity = getattr(self._device, "intensity", 0)
 
-        return int((intensity * 255) / 100)
+        return _convert_100_to_255(intensity)
 
     @property
     def rgbw_color(self) -> tuple[int, int, int, int] | None:
@@ -129,8 +139,8 @@ class OriLightEntity(OriEntity, LightEntity):
         white = getattr(self._device, "white", 0)
 
         return (
-            int((red * 255) / 100),
-            int((green * 255) / 100),
-            int((blue * 255) / 100),
-            int((white * 255) / 100),
+            _convert_100_to_255(red),
+            _convert_100_to_255(green),
+            _convert_100_to_255(blue),
+            _convert_100_to_255(white),
         )
