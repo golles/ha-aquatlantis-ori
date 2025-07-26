@@ -11,6 +11,7 @@ from homeassistant.const import ATTR_ENTITY_ID
 from homeassistant.core import HomeAssistant
 
 from aquatlantis_ori import LightOptions, ModeType, PowerType
+from custom_components.ori.light import _convert_100_to_255, _convert_255_to_100
 
 from . import setup_integration, unload_integration
 from .test_helpers import check_state_value, create_test_device
@@ -30,7 +31,7 @@ async def test_light(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock) ->
         {
             "color_mode": ColorMode.RGBW,
             "brightness": 204,
-            "rgbw_color": (25, 51, 76, 102),
+            "rgbw_color": (26, 51, 76, 102),  # Updated due to improved rounding
         },
     )
 
@@ -133,3 +134,39 @@ async def test_light_turn_off(hass: HomeAssistant, mock_aquatlantis_client: Asyn
     call.assert_called_once_with(PowerType.OFF)
 
     await unload_integration(hass, config_entry)
+
+
+@pytest.mark.parametrize(
+    ("input_value", "expected_output"),
+    [
+        (0, 0),
+        (26, 10),
+        (51, 20),
+        (76, 30),
+        (102, 40),
+        (128, 50),
+        (204, 80),
+        (255, 100),
+    ],
+)
+def test_convert_255_to_100(input_value: int, expected_output: int) -> None:
+    """Test conversion from 0-255 range to 0-100 range."""
+    assert _convert_255_to_100(input_value) == expected_output
+
+
+@pytest.mark.parametrize(
+    ("input_value", "expected_output"),
+    [
+        (0, 0),
+        (10, 26),
+        (20, 51),
+        (30, 76),
+        (40, 102),
+        (50, 128),
+        (80, 204),
+        (100, 255),
+    ],
+)
+def test_convert_100_to_255(input_value: int, expected_output: int) -> None:
+    """Test conversion from 0-100 range to 0-255 range."""
+    assert _convert_100_to_255(input_value) == expected_output
