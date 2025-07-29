@@ -208,9 +208,10 @@ To collect detailed logs for troubleshooting:
 #### Method 1: Integration Debug (Recommended)
 
 1. Go to **Settings** → **Devices & Services** → **Aquatlantis Ori**
-2. Click **"Enable debug logging"**
-3. Reproduce the issue
-4. Click **"Stop debug logging"** to download the log file
+2. Click the 3 dots menu in the top right corner
+3. Click **"Enable debug logging"**
+4. Reproduce the issue
+5. Click **"Stop debug logging"** to download the log file
 
 #### Method 2: Logger Configuration
 
