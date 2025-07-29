@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.helpers.device_registry import DeviceInfo
+from homeassistant.helpers.device_registry import CONNECTION_NETWORK_MAC, DeviceInfo
 from homeassistant.helpers.entity import Entity, EntityDescription
 
 from aquatlantis_ori import AquatlantisOriClient, Device, StatusType
@@ -52,6 +52,7 @@ class OriEntity(Entity):
         self._attr_device_info = DeviceInfo(
             name=device.name,
             identifiers={(DOMAIN, device.id)},
+            connections={(CONNECTION_NETWORK_MAC, device.mac)},
             manufacturer=device.brand,
             model="Ori",
             model_id=device.light_type.name if device.light_type is not None else device.devid,
