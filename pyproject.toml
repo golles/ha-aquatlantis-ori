@@ -35,7 +35,7 @@ dev = [
     "pytest-asyncio",
     "pytest-cov",
     "pytest-homeassistant-custom-component==0.13.260",
-    "ruff==0.12.5",
+    "ruff==0.12.7",
     "shellcheck-py==0.10.0.1",
     "yamllint==1.37.1",
 ]
