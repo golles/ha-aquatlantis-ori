@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 
 from homeassistant.core import HomeAssistant
 
-from aquatlantis_ori import Device, DynamicModeType, LightType, ModeType, PowerType, PreviewType, SensorType, SensorValidType
+from aquatlantis_ori import Device, DynamicModeType, LightType, ModeType, PowerType, SensorType, SensorValidType
 from aquatlantis_ori.http.models import LatestFirmwareResponseData, ListAllDevicesResponseDevice
 from aquatlantis_ori.mqtt.models import MQTTRetrievePayloadParam
 
@@ -95,7 +95,7 @@ def create_test_device(data: dict[str, Any] | None = None) -> Device:
             custom3=data.get("custom3"),
             custom4=data.get("custom4"),
             timecurve=data.get("timecurve", [2, 8, 0, 50, 10, 20, 30, 40, 18, 30, 80, 60, 70, 80, 90]),
-            preview=data.get("preview", PreviewType.OFF.value),
+            preview=data.get("preview", 0),
             light_type=data.get("light_type", LightType.RGBW_ULTRA.value),
             dynamic_mode=data.get("dynamic_mode", DynamicModeType.OFF.value),
             mode=data.get("mode", ModeType.MANUAL.value),
