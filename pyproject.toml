@@ -28,7 +28,7 @@ Issues = "https://github.com/golles/ha-aquatlantis-ori/issues"
 
 [dependency-groups]
 dev = [
-    "mypy==1.17.0",
+    "mypy==1.17.1",
     "pre-commit==4.2.0",
     "pylint==3.3.7",
     "pytest",
