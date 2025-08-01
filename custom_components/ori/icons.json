@@ -2,7 +2,6 @@
   "entity": {
     "light": {
       "light": {
-        "name": "Light",
         "state_attributes": {
           "effect": {
             "state": {
