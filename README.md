@@ -87,6 +87,7 @@ Once configured, the integration provides various entities to monitor and contro
 
 The main light control entity with full RGBW support and brightness control.
 
+- **Effects**: Manual, automatic, and dynamic mode
 - **Features**: On/off, brightness (0-100%), RGBW colors (0-255 each)
 - **Modes**:
   - On/off only when automatic or dynamic mode is enabled
@@ -103,10 +104,6 @@ Quick-access buttons for your saved color presets from the Ori app.
 - Instantly applies the preset when pressed
 
 ### Control Entities
-
-**Light Mode Select** - Switch between manual and automatic light control
-
-**Dynamic Mode Select** - Enable/disable lightning effects
 
 **Manual Controls** - Individual intensity and RGBW number entities (disabled by default)
 
@@ -141,6 +138,13 @@ Quick-access buttons for your saved color presets from the Ori app.
 Control your light like any other Home Assistant light:
 
 ```yaml
+# Change the light mode (effect)
+action: light.turn_on
+target:
+  entity_id: light.aquarium_light
+data:
+  effect: manual # automatic or dynamic
+
 # Turn on with warm white at 80% brightness
 action: light.turn_on
 target:
@@ -168,26 +172,29 @@ target:
 ```yaml
 # Turn on aquarium light at sunrise
 automation:
-  - alias: "Aquarium Morning Light"
+  - alias: Aquarium Morning Light
     trigger:
       platform: sun
       event: sunrise
     action:
-      - action: select.select_option
-        target:
-          entity_id: select.aquarium_light_mode
+      - alias: Make sure the light is in manual mode
+        action: light.turn_on
         data:
-          option: "manual"
-      - action: light.turn_on
+          effect: manual
+        target:
+          entity_id: light.aquarium_light
+
+      - alias: Set light to warm sunrise colors
+        action: light.turn_on
         target:
           entity_id: light.aquarium_light
         data:
           brightness_pct: 30
-          rgbw_color: [255, 100, 50, 100]  # Warm sunrise colors
+          rgbw_color: [255, 100, 50, 100]
 
 # Alert when water temperature is too high
 automation:
-  - alias: "Aquarium Temperature Alert"
+  - alias: Aquarium Temperature Alert
     trigger:
       platform: state
       entity_id: binary_sensor.aquarium_water_temperature_problem
@@ -195,8 +202,8 @@ automation:
     action:
       - action: notify.mobile_app_your_phone
         data:
-          title: "Aquarium Alert"
-          message: "Water temperature is outside normal range!"
+          title: Aquarium Alert
+          message: Water temperature is outside normal range!
 ```
 
 ## Troubleshooting

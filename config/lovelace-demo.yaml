@@ -11,31 +11,22 @@ views:
             heading_style: title
             icon: mdi:lightbulb
           - type: tile
-            entity: light.aquarium_licht
+            entity: light.aquarium_light
             features_position: bottom
             vertical: false
             name: Light
-            grid_options:
-              columns: 12
-              rows: 1
-          - type: entities
-            entities:
-              - entity: select.aquarium_lichtmodus
-                name: Light mode
-              - entity: select.aquarium_dynamische_modus
-                name: Dynamic mode
 
           - type: heading
             icon: mdi:thermometer
             heading: Temperature
             heading_style: title
           - type: tile
-            entity: sensor.aquarium_watertemperatuur
+            entity: sensor.aquarium_water_temperature
             features_position: bottom
             vertical: false
             name: Temperature
           - type: tile
-            entity: binary_sensor.aquarium_watertemperatuur
+            entity: binary_sensor.aquarium_water_temperature
             features_position: bottom
             vertical: false
             name: Temperature
@@ -73,15 +64,15 @@ views:
             icon: mdi:format-list-checkbox
           - type: entities
             entities:
-              - entity: number.aquarium_intensiteit
+              - entity: number.aquarium_intensity
                 name: Intensity
               - entity: number.aquarium_red
                 name: Red
-              - entity: number.aquarium_groen
+              - entity: number.aquarium_green
                 name: Green
-              - entity: number.aquarium_blauw
+              - entity: number.aquarium_blue
                 name: Blue
-              - entity: number.aquarium_wit
+              - entity: number.aquarium_white
                 name: White
 
           - type: heading
@@ -89,7 +80,7 @@ views:
             heading_style: title
             heading: Diagnostic
           - type: tile
-            entity: binary_sensor.aquarium_connectiviteit
+            entity: binary_sensor.aquarium_connectivity
             features_position: bottom
             vertical: false
             name: Connectivity
@@ -99,7 +90,7 @@ views:
             vertical: false
             name: Firmware
           - type: tile
-            entity: sensor.aquarium_wifi_signaal
+            entity: sensor.aquarium_wifi_signal
             features_position: bottom
             vertical: false
             name: Wifi signal
@@ -109,18 +100,18 @@ views:
             vertical: false
             name: Uptime
           - type: tile
-            entity: sensor.aquarium_bluetooth_mac_adres
+            entity: sensor.aquarium_bluetooth_mac_address
             features_position: bottom
             vertical: false
             name: Bluetooth MAC
             hide_state: false
           - type: tile
-            entity: sensor.aquarium_wifi_mac_adres
+            entity: sensor.aquarium_wifi_mac_address
             features_position: bottom
             vertical: false
             name: Wifi MAC
           - type: tile
-            entity: sensor.aquarium_ip_adres
+            entity: sensor.aquarium_ip_address
             features_position: bottom
             vertical: false
             name: IP address

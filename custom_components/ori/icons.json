@@ -1,5 +1,19 @@
 {
   "entity": {
+    "light": {
+      "light": {
+        "name": "Light",
+        "state_attributes": {
+          "effect": {
+            "state": {
+              "manual": "mdi:lightbulb",
+              "automatic": "mdi:lightbulb-auto",
+              "dynamic": "mdi:lightning-bolt"
+            }
+          }
+        }
+      }
+    },
     "sensor": {
       "bluetooth_mac": { "default": "mdi:bluetooth" },
       "ip": { "default": "mdi:ip-network" },
