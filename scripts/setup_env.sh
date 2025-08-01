@@ -27,7 +27,7 @@ npm install
 
 if [ "$CI" != "true" ]; then
     # Trust the repo
-    git config --global --add safe.directory /workspaces/python-aquatlantis-ori
+    git config --global --add safe.directory /workspaces/ha-aquatlantis-ori
 
     # Install pre-commit when available
     if [ -f .pre-commit-config.yaml ]; then
