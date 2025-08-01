@@ -9,22 +9,29 @@ from typing import Any
 
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
+    ATTR_EFFECT,
     ATTR_RGBW_COLOR,
     ColorMode,
     LightEntity,
     LightEntityDescription,
+    LightEntityFeature,
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
-from aquatlantis_ori import AquatlantisOriClient, DynamicModeType, LightOptions, ModeType, PowerType
+from aquatlantis_ori import AquatlantisOriClient, Device, DynamicModeType, LightOptions, ModeType, PowerType
 
 from .entity import OriEntity, OriEntityDescription
 
 _LOGGER = logging.getLogger(__name__)
 PARALLEL_UPDATES = 0
 SCAN_INTERVAL = timedelta(seconds=2)
+
+EFFECT_MANUAL = "manual"
+EFFECT_AUTOMATIC = "automatic"
+EFFECT_DYNAMIC = "dynamic"
+EFFECT_LIST = [EFFECT_MANUAL, EFFECT_AUTOMATIC, EFFECT_DYNAMIC]
 
 
 def _convert_255_to_100(value: int) -> int:
@@ -81,10 +88,33 @@ class OriLightEntity(OriEntity, LightEntity):
 
     entity_description: OriLightEntityDescription
 
+    def __init__(
+        self,
+        config_entry: ConfigEntry[AquatlantisOriClient],
+        description: OriEntityDescription,
+        device: Device,
+    ) -> None:
+        """Initialize light."""
+        super().__init__(config_entry, description, device)
+        self._attr_effect_list = EFFECT_LIST
+        self._attr_supported_features |= LightEntityFeature.EFFECT
+
     def turn_on(self, **kwargs: Any) -> None:  # noqa: ANN401
         """Turn the entity on."""
         _LOGGER.info("Turning on, or changing light %s on device %s", self.entity_description.key, self._device.devid)
         options = LightOptions()
+
+        if ATTR_EFFECT in kwargs:
+            effect = kwargs[ATTR_EFFECT]
+            if effect == EFFECT_MANUAL:
+                self._device.set_mode(ModeType.MANUAL)
+                self._device.set_dynamic_mode(DynamicModeType.OFF)
+            elif effect == EFFECT_AUTOMATIC:
+                self._device.set_mode(ModeType.AUTOMATIC)
+                self._device.set_dynamic_mode(DynamicModeType.OFF)
+            elif effect == EFFECT_DYNAMIC:
+                self._device.set_mode(ModeType.MANUAL)
+                self._device.set_dynamic_mode(DynamicModeType.ON)
 
         if ATTR_RGBW_COLOR in kwargs:
             rgbw = kwargs[ATTR_RGBW_COLOR]
@@ -92,6 +122,7 @@ class OriLightEntity(OriEntity, LightEntity):
             options.green = _convert_255_to_100(rgbw[1])
             options.blue = _convert_255_to_100(rgbw[2])
             options.white = _convert_255_to_100(rgbw[3])
+
         if ATTR_BRIGHTNESS in kwargs:
             options.intensity = _convert_255_to_100(kwargs.get(ATTR_BRIGHTNESS, 0))
 
@@ -101,6 +132,16 @@ class OriLightEntity(OriEntity, LightEntity):
         """Turn the entity off."""
         _LOGGER.info("Turning off light %s on device %s", self.entity_description.key, self._device.devid)
         self._device.set_power(PowerType.OFF)
+
+    @property
+    def effect(self) -> str | None:
+        """Return the current effect."""
+        if self._device.mode == ModeType.AUTOMATIC:
+            return EFFECT_AUTOMATIC
+        if self._device.dynamic_mode == DynamicModeType.ON:
+            return EFFECT_DYNAMIC
+
+        return EFFECT_MANUAL
 
     @property
     def color_mode(self) -> ColorMode | str | None:
@@ -121,7 +162,7 @@ class OriLightEntity(OriEntity, LightEntity):
     @property
     def is_on(self) -> bool:
         """Return true if device is on."""
-        return self._device.power == PowerType.ON or self._device.mode == ModeType.AUTOMATIC
+        return self._device.power == PowerType.ON
 
     @property
     def brightness(self) -> int:

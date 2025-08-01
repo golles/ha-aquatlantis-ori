@@ -77,7 +77,16 @@
     },
     "light": {
       "light": {
-        "name": "Light"
+        "name": "Light",
+        "state_attributes": {
+          "effect": {
+            "state": {
+              "manual": "Manual",
+              "automatic": "Automatic",
+              "dynamic": "Dynamic"
+            }
+          }
+        }
       }
     },
     "number": {
@@ -95,22 +104,6 @@
       },
       "white": {
         "name": "White"
-      }
-    },
-    "select": {
-      "dynamic_mode": {
-        "name": "Dynamic mode",
-        "state": {
-          "on": "On",
-          "off": "Off"
-        }
-      },
-      "mode": {
-        "name": "Light mode",
-        "state": {
-          "manual": "Manual",
-          "automatic": "Automatic"
-        }
       }
     },
     "sensor": {
