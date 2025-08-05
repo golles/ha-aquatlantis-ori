@@ -112,6 +112,7 @@ class OriLightEntity(OriEntity, LightEntity):
             elif effect == EFFECT_AUTOMATIC:
                 self._device.set_mode(ModeType.AUTOMATIC)
                 self._device.set_dynamic_mode(DynamicModeType.OFF)
+                return  # No need to continue, automatic mode does not require RGBW settings and changing power
             elif effect == EFFECT_DYNAMIC:
                 self._device.set_mode(ModeType.MANUAL)
                 self._device.set_dynamic_mode(DynamicModeType.ON)
@@ -131,6 +132,7 @@ class OriLightEntity(OriEntity, LightEntity):
     def turn_off(self, **_kwargs: Any) -> None:  # noqa: ANN401
         """Turn the entity off."""
         _LOGGER.info("Turning off light %s on device %s", self.entity_description.key, self._device.devid)
+        self._device.set_mode(ModeType.MANUAL)
         self._device.set_power(PowerType.OFF)
 
     @property
@@ -162,7 +164,7 @@ class OriLightEntity(OriEntity, LightEntity):
     @property
     def is_on(self) -> bool:
         """Return true if device is on."""
-        return self._device.power == PowerType.ON
+        return self._device.is_light_on
 
     @property
     def brightness(self) -> int:

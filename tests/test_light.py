@@ -174,7 +174,9 @@ async def test_light_turn_on_with_effect(
     # Test that the light change was sent to the device
     call_mode.assert_called_once_with(mode)
     call_dynamic.assert_called_once_with(dynamic)
-    call_light.assert_called_once_with(PowerType.ON, LightOptions())
+    if mode == ModeType.MANUAL:
+        # If the mode is manual, we should call set_light with PowerType.ON and LightOptions
+        call_light.assert_called_once_with(PowerType.ON, LightOptions())
 
     await unload_integration(hass, config_entry)
 
@@ -186,9 +188,10 @@ async def test_light_turn_off(hass: HomeAssistant, mock_aquatlantis_client: Asyn
 
     config_entry = await setup_integration(hass)
 
-    with patch(
-        "aquatlantis_ori.device.Device.set_power",
-    ) as call:
+    with (
+        patch("aquatlantis_ori.device.Device.set_power") as call_power,
+        patch("aquatlantis_ori.device.Device.set_mode") as call_mode,
+    ):
         await hass.services.async_call(
             LIGHT_DOMAIN,
             SERVICE_TURN_OFF,
@@ -198,7 +201,8 @@ async def test_light_turn_off(hass: HomeAssistant, mock_aquatlantis_client: Asyn
         await hass.async_block_till_done()
 
     # Test that the light change was sent to the device
-    call.assert_called_once_with(PowerType.OFF)
+    call_power.assert_called_once_with(PowerType.OFF)
+    call_mode.assert_called_once_with(ModeType.MANUAL)
 
     await unload_integration(hass, config_entry)
 
