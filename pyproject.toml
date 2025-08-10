@@ -30,7 +30,7 @@ Issues = "https://github.com/golles/ha-aquatlantis-ori/issues"
 dev = [
     "mypy==1.17.1",
     "pre-commit==4.2.0",
-    "pylint==3.3.7",
+    "pylint==3.3.8",
     "pytest",
     "pytest-asyncio",
     "pytest-cov",
