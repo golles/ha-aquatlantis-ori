@@ -44,20 +44,3 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ori.zip
-
-      - name: Setup app
-        id: app
-        uses: golles/github-workflows/actions/setup-app@main
-        with:
-          app-id: ${{ secrets.PR2D2_APP_ID }}
-          private-key: ${{ secrets.PR2D2_APP_PRIVATE_KEY }}
-
-      - name: Commit and push manifest.json
-        env:
-          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
-        run: |
-          git config user.name "${{ steps.app.outputs.name }}"
-          git config user.email "${{ steps.app.outputs.email }}"
-          git add custom_components/ori/manifest.json
-          git commit -m "Update version in manifest.json"
-          git push origin HEAD:main
