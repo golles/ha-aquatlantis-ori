@@ -67,7 +67,7 @@ async def test_unsuccessful_config_flow(side_effect: Exception, error: str, hass
     # If a user were to fill in an incomplete form, it would result in this function call
     result2 = await hass.config_entries.flow.async_configure(result["flow_id"], user_input=config_data)
 
-    # Check that the config flow returns an error due to missing email
+    # Check that the config flow returns the error
     assert result2["type"] == FlowResultType.FORM
     assert result2["errors"] == {"base": error}
 
