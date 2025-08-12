@@ -56,8 +56,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app.outputs.token }}
         run: |
-          git config user.name "${{ steps.app.outputs.name }}>"
-          git config user.email "${{ steps.app.outputs.email }}>"
+          git config user.name "${{ steps.app.outputs.name }}"
+          git config user.email "${{ steps.app.outputs.email }}"
           git add custom_components/ori/manifest.json
           git commit -m "Update version in manifest.json"
-          git push
+          git push origin HEAD:main
