@@ -4,9 +4,7 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 from homeassistant.components.light import ATTR_BRIGHTNESS, ATTR_EFFECT, ATTR_RGBW_COLOR, SERVICE_TURN_OFF, SERVICE_TURN_ON, ColorMode
-from homeassistant.components.light import (
-    DOMAIN as LIGHT_DOMAIN,
-)
+from homeassistant.components.light import DOMAIN as LIGHT_DOMAIN
 from homeassistant.const import ATTR_ENTITY_ID
 from homeassistant.core import HomeAssistant
 

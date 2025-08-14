@@ -11,9 +11,6 @@
   "files.trimTrailingWhitespace": true,
   "mypy-type-checker.importStrategy": "fromEnvironment",
   "pylint.importStrategy": "fromEnvironment",
-  "python.analysis.diagnosticSeverityOverrides": {
-    "reportShadowedImports": "none"
-  },
   "python.analysis.extraPaths": ["${workspaceFolder}/custom_components/ori"],
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
   "python.testing.cwd": "${workspaceFolder}",

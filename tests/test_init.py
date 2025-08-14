@@ -38,7 +38,7 @@ async def test_setup_entry_exception(hass: HomeAssistant, mock_aquatlantis_clien
         await async_setup_entry(hass, config_entry)
 
 
-async def test_setup_timeout_no_exception(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock, caplog: LogCaptureFixture) -> None:
+async def test_setup_entry_timeour_exception(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock, caplog: LogCaptureFixture) -> None:
     """Test setup entry does not raise exception on timeout."""
     # Configure the mock to simulate a timeout
     mock_aquatlantis_client.connect.side_effect = TimeoutError("Connection timed out")
