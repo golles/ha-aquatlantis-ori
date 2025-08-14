@@ -66,6 +66,7 @@ disable = [
   "abstract-method",
   "duplicate-code",
   "unexpected-keyword-arg",
+  "wrong-import-order",
 ]
 
 [tool.pytest.ini_options]
@@ -83,7 +84,6 @@ src = ["custom_components/ori"]
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-  "A005",
   "COM812",  # Cause conflicts when used with the formatter.
   "TC",  # Ignore type-checking blocks.
 ]

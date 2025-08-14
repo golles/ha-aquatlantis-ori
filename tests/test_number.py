@@ -3,13 +3,8 @@
 from unittest.mock import AsyncMock, patch
 
 import pytest
-from homeassistant.components.number import (
-    ATTR_VALUE,
-    SERVICE_SET_VALUE,
-)
-from homeassistant.components.number import (
-    DOMAIN as NUMBER_DOMAIN,
-)
+from homeassistant.components.number import ATTR_VALUE, SERVICE_SET_VALUE
+from homeassistant.components.number import DOMAIN as NUMBER_DOMAIN
 from homeassistant.const import ATTR_ENTITY_ID
 from homeassistant.core import HomeAssistant
 

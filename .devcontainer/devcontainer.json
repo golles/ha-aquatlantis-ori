@@ -1,7 +1,7 @@
 {
   "name": "HA Aquatlantis Ori",
   "image": "mcr.microsoft.com/devcontainers/python:3.13",
-  "postCreateCommand": "./scripts/setup_env.sh",
+  "postCreateCommand": "./scripts/setup_env.sh --devcontainer",
   "forwardPorts": [8123],
   "portsAttributes": {
     "8123": {
@@ -42,9 +42,6 @@
         "files.trimTrailingWhitespace": true,
         "mypy-type-checker.importStrategy": "fromEnvironment",
         "pylint.importStrategy": "fromEnvironment",
-        "python.analysis.diagnosticSeverityOverrides": {
-          "reportShadowedImports": "none"
-        },
         "python.analysis.extraPaths": ["${workspaceFolder}/custom_components/ori"],
         "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
         "python.testing.cwd": "${workspaceFolder}",
