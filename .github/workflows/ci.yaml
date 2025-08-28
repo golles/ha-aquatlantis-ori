@@ -20,7 +20,7 @@ jobs:
       matrix:
         include:
           - name: mypy
-            command: uv run mypy .
+            command: uv run mypy . --output=json | jq -r '"::error title=Mypy issue,file=\(.file),line=\(.line),col=\(.column)::\(.message)"'
           - name: Prettier
             command: npm run prettier -- --check .
           - name: Pylint
