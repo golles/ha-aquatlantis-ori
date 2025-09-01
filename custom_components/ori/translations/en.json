@@ -85,6 +85,14 @@
               "automatic": "Automatic",
               "dynamic": "Dynamic"
             }
+          },
+          "light_mode": {
+            "name": "Mode",
+            "state": {
+              "manual": "Manual",
+              "automatic": "Automatic",
+              "dynamic": "Dynamic"
+            }
           }
         }
       }

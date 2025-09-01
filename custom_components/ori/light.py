@@ -34,6 +34,16 @@ EFFECT_DYNAMIC = "dynamic"
 EFFECT_LIST = [EFFECT_MANUAL, EFFECT_AUTOMATIC, EFFECT_DYNAMIC]
 
 
+def _effect_name(device: Device) -> str:
+    """Get the effect name for the device."""
+    if device.mode == ModeType.AUTOMATIC:
+        return EFFECT_AUTOMATIC
+    if device.dynamic_mode == DynamicModeType.ON:
+        return EFFECT_DYNAMIC
+
+    return EFFECT_MANUAL
+
+
 def _convert_255_to_100(value: int) -> int:
     """Convert value from 0-255 range to 0-100 range."""
     return round((value * 100) / 255)
@@ -53,6 +63,9 @@ DESCRIPTIONS: list[OriLightEntityDescription] = [
     OriLightEntityDescription(
         key="light",
         translation_key="light",
+        state_attributes_fn=lambda device: {
+            "light_mode": _effect_name(device),
+        },
     ),
 ]
 
@@ -138,12 +151,7 @@ class OriLightEntity(OriEntity, LightEntity):
     @property
     def effect(self) -> str | None:
         """Return the current effect."""
-        if self._device.mode == ModeType.AUTOMATIC:
-            return EFFECT_AUTOMATIC
-        if self._device.dynamic_mode == DynamicModeType.ON:
-            return EFFECT_DYNAMIC
-
-        return EFFECT_MANUAL
+        return _effect_name(self._device)
 
     @property
     def color_mode(self) -> ColorMode | str | None:
