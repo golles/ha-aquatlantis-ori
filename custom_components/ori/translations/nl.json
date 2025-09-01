@@ -85,6 +85,14 @@
               "automatic": "Automatisch",
               "dynamic": "Dynamisch"
             }
+          },
+          "light_mode": {
+            "name": "Modus",
+            "state": {
+              "manual": "Handmatig",
+              "automatic": "Automatisch",
+              "dynamic": "Dynamisch"
+            }
           }
         }
       }
