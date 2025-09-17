@@ -145,5 +145,35 @@
         }
       }
     }
+  },
+  "exceptions": {
+    "config_entry_not_found": {
+      "message": "Integratie configuratie niet gevonden."
+    },
+    "device_entry_not_found": {
+      "message": "Integratie apparaat niet gevonden."
+    },
+    "device_not_found": {
+      "message": "Apparaat niet gevonden."
+    },
+    "invalid_time_curve": {
+      "message": "Ongeldig tijdschema: {curve}."
+    }
+  },
+  "services": {
+    "set_schedule": {
+      "name": "Stel tijdschema in",
+      "description": "Stel de tijdschema van de verlichting in. Let op: dit is een geavanceerde functie, gebruik deze service alleen als je weet wat je doet!",
+      "fields": {
+        "device_id": {
+          "name": "Apparaat",
+          "description": "Het apparaat waarvoor je het tijdschema wilt instellen."
+        },
+        "schedule": {
+          "name": "Tijdschema",
+          "description": "Formaat: uur,minuut,helderheid,rood,groen,blauw,wit. Voorbeeld: 12,30,80,50,50,50,50"
+        }
+      }
+    }
   }
 }

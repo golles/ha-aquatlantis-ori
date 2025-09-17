@@ -1,0 +1,13 @@
+set_schedule:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: ori
+    schedule:
+      required: true
+      example: 12,30,80,50,50,50,50
+      selector:
+        text:
+          multiple: true
