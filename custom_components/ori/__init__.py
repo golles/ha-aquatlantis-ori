@@ -6,14 +6,18 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_EMAIL, CONF_PASSWORD, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.typing import ConfigType
 
 from aquatlantis_ori import AquatlantisOriClient, AquatlantisOriError
 
-from .services import async_setup_services
+from .const import DOMAIN
+from .services import setup_services
 
 _LOGGER = logging.getLogger(__name__)
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 PLATFORMS = [
     Platform.BINARY_SENSOR,
@@ -26,8 +30,8 @@ PLATFORMS = [
 
 
 async def async_setup(hass: HomeAssistant, _config: ConfigType) -> bool:
-    """Set up service actions."""
-    async_setup_services(hass)
+    """Setup."""
+    setup_services(hass)
 
     return True
 

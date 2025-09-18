@@ -124,7 +124,7 @@ def parse_timecurves(timecurves: list[str]) -> list[TimeCurve]:
 
 
 @callback
-def async_setup_services(hass: HomeAssistant) -> None:
+def setup_services(hass: HomeAssistant) -> None:
     """Set up services."""
 
     def set_schedule(call: ServiceCall) -> None:
