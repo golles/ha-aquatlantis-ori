@@ -7,6 +7,6 @@
   "iot_class": "cloud_push",
   "issue_tracker": "https://github.com/golles/ha-aquatlantis-ori/issues",
   "loggers": ["aquatlantis_ori", "custom_components.ori"],
-  "requirements": ["aquatlantis_ori==0.0.11"],
+  "requirements": ["aquatlantis_ori==0.0.12"],
   "version": "0.0.1"
 }

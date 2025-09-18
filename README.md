@@ -131,6 +131,10 @@ Quick-access buttons for your saved color presets from the Ori app.
 - Download URL and filename in attributes
 - Update through Ori app (not directly through HA)
 
+## Available services
+
+The integration provides a custom service to set complex light schedules.
+
 ## Usage Examples
 
 ### Basic Light Control
@@ -204,6 +208,25 @@ automation:
         data:
           title: Aquarium Alert
           message: Water temperature is outside normal range!
+```
+
+### Service example: Set schedule
+
+You can set a complex light schedule using the `ori.set_schedule` service. The schedule consists of as many entries you like, each defined by a start time, intensity and values for different channels.
+The format for a schedule entry is as follows: `hour,minute,intensity,red,green,blue,white`
+
+```yaml
+action: ori.set_schedule
+data:
+  device_id: b12345c1dca0996b9619e7df53a42ad3
+  schedule:
+    - 8,59,0,0,0,0,0 # time: 08:59, intensity: 0, red: 0, green: 0, blue: 0, white: 0
+    - 9,0,15,20,20,25,30 # time: 09:00, intensity: 15, red: 20, green: 20, blue: 25, white: 30
+    - 10,0,40,30,30,35,50 # time: 10:00, intensity: 40, red: 30, green: 30, blue: 35, white: 50
+    - 12,0,80,35,35,45,80 # time: 12:00, intensity: 80, red: 35, green: 35, blue: 45, white: 80
+    - 15,0,70,30,30,40,70 # time: 15:00, intensity: 70, red: 30, green: 30, blue: 40, white: 70
+    - 17,0,40,20,20,25,40 # time: 17:00, intensity: 40, red: 20, green: 20, blue: 25, white: 40
+    - 18,0,0,0,0,0,0 # time: 18:00, intensity: 0, red: 0, green: 0, blue: 0, white: 0
 ```
 
 ## Troubleshooting
