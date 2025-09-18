@@ -8,7 +8,7 @@ import re
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import ATTR_DEVICE_ID
-from homeassistant.core import HomeAssistant, ServiceCall
+from homeassistant.core import HomeAssistant, ServiceCall, callback
 from homeassistant.exceptions import ServiceValidationError
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.selector import TextSelector, TextSelectorConfig
@@ -123,10 +123,11 @@ def parse_timecurves(timecurves: list[str]) -> list[TimeCurve]:
     return parsed_timecurves
 
 
-async def async_setup_services(hass: HomeAssistant) -> None:
+@callback
+def async_setup_services(hass: HomeAssistant) -> None:
     """Set up services."""
 
-    async def set_schedule(call: ServiceCall) -> None:
+    def set_schedule(call: ServiceCall) -> None:
         """Set schedule."""
         schedule = parse_timecurves(call.data[ATTR_SCHEDULE])
         device_entry = get_device_entry(hass, call)

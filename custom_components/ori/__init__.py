@@ -27,7 +27,7 @@ PLATFORMS = [
 
 async def async_setup(hass: HomeAssistant, _config: ConfigType) -> bool:
     """Set up service actions."""
-    await async_setup_services(hass)
+    async_setup_services(hass)
 
     return True
 
