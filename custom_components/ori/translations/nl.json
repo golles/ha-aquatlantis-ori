@@ -93,6 +93,9 @@
               "automatic": "Automatisch",
               "dynamic": "Dynamisch"
             }
+          },
+          "schedule": {
+            "name": "Tijdschema"
           }
         }
       }

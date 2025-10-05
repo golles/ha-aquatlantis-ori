@@ -93,6 +93,9 @@
               "automatic": "Automatic",
               "dynamic": "Dynamic"
             }
+          },
+          "schedule": {
+            "name": "Schedule"
           }
         }
       }
