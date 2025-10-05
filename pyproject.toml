@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "aquatlantis_ori==0.0.12",
+    "aquatlantis_ori==0.0.13",
     "homeassistant>=2025.7.0",
 ]
 
