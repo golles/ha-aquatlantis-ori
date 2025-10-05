@@ -44,6 +44,24 @@ def _effect_name(device: Device) -> str:
     return EFFECT_MANUAL
 
 
+def _schedule(device: Device) -> dict[str, dict[str, int]] | None:
+    """Get the light schedule for the device."""
+    if device.timecurve is None:
+        return None
+
+    schedule: dict[str, dict[str, int]] = {}
+    for curve in device.timecurve:
+        schedule[f"{curve.hour:>02}:{curve.minute:>02}"] = {
+            "intensity": curve.intensity,
+            "red": curve.red,
+            "green": curve.green,
+            "blue": curve.blue,
+            "white": curve.white,
+        }
+
+    return schedule
+
+
 def _convert_255_to_100(value: int) -> int:
     """Convert value from 0-255 range to 0-100 range."""
     return round((value * 100) / 255)
@@ -65,6 +83,7 @@ DESCRIPTIONS: list[OriLightEntityDescription] = [
         translation_key="light",
         state_attributes_fn=lambda device: {
             "light_mode": _effect_name(device),
+            "schedule": _schedule(device),
         },
     ),
 ]

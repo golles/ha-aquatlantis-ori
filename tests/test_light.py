@@ -8,7 +8,7 @@ from homeassistant.components.light import DOMAIN as LIGHT_DOMAIN
 from homeassistant.const import ATTR_ENTITY_ID
 from homeassistant.core import HomeAssistant
 
-from aquatlantis_ori import DynamicModeType, LightOptions, ModeType, PowerType
+from aquatlantis_ori import DynamicModeType, LightOptions, ModeType, PowerType, TimeCurve
 from custom_components.ori.light import EFFECT_AUTOMATIC, EFFECT_DYNAMIC, EFFECT_MANUAL, _convert_100_to_255, _convert_255_to_100
 
 from . import setup_integration, unload_integration
@@ -271,3 +271,42 @@ def test_convert_255_to_100(input_value: int, expected_output: int) -> None:
 def test_convert_100_to_255(input_value: int, expected_output: int) -> None:
     """Test conversion from 0-100 range to 0-255 range."""
     assert _convert_100_to_255(input_value) == expected_output
+
+
+async def test_light_schedule_attribute(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock) -> None:
+    """Test light with schedule attribute set."""
+    device = create_test_device({"mode": ModeType.AUTOMATIC.value})
+    device.timecurve = [
+        TimeCurve(hour=0, minute=0, intensity=0, red=0, green=0, blue=0, white=0),
+        TimeCurve(hour=23, minute=59, intensity=100, red=255, green=255, blue=255, white=255),
+    ]
+    mock_aquatlantis_client.get_devices.return_value = [device]
+
+    config_entry = await setup_integration(hass)
+
+    check_state_value(
+        hass,
+        "light.test_device_light",
+        "on",
+        {
+            "schedule": {
+                "00:00": {"intensity": 0, "red": 0, "green": 0, "blue": 0, "white": 0},
+                "23:59": {"intensity": 100, "red": 255, "green": 255, "blue": 255, "white": 255},
+            }
+        },
+    )
+
+    await unload_integration(hass, config_entry)
+
+
+async def test_light_no_schedule_attribute(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock) -> None:
+    """Test light with no schedule attribute set."""
+    device = create_test_device({"mode": ModeType.AUTOMATIC.value})
+    device.timecurve = None
+    mock_aquatlantis_client.get_devices.return_value = [device]
+
+    config_entry = await setup_integration(hass)
+
+    check_state_value(hass, "light.test_device_light", "on", {"schedule": None})
+
+    await unload_integration(hass, config_entry)
