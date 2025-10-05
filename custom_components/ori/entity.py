@@ -51,7 +51,7 @@ class OriEntity(Entity):
         self._device = device
         self._attr_device_info = DeviceInfo(
             name=device.name,
-            identifiers={(DOMAIN, device.id)},
+            identifiers={(DOMAIN, str(device.id))},
             connections={(CONNECTION_NETWORK_MAC, device.mac)},
             manufacturer=device.brand,
             model="Ori",
