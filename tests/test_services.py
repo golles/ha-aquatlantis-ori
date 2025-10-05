@@ -24,7 +24,7 @@ async def test_service_set_schedule(hass: HomeAssistant, device_registry: Device
 
     config_entry = await setup_integration(hass)
 
-    ha_device = device_registry.async_get_device(identifiers={(DOMAIN, device.id)})
+    ha_device = device_registry.async_get_device(identifiers={(DOMAIN, str(device.id))})
     assert ha_device
 
     with patch("aquatlantis_ori.device.Device.set_timecurve") as call:
