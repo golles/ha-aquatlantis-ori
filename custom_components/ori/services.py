@@ -63,7 +63,7 @@ def get_device(device_entry: dr.DeviceEntry, config: ConfigEntry[AquatlantisOriC
     """Get the device data for a config entry."""
     device_data: Device | None = None
     for device in config.runtime_data.get_devices():
-        if device_entry.identifiers == {(DOMAIN, device.id)}:
+        if device_entry.identifiers == {(DOMAIN, str(device.id))}:
             device_data = device
 
     if device_data is None:
