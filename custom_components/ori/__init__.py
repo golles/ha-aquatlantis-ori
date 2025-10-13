@@ -17,7 +17,7 @@ from .services import setup_services
 
 _LOGGER = logging.getLogger(__name__)
 
-CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)  # pylint: disable=invalid-name
 
 PLATFORMS = [
     Platform.BINARY_SENSOR,
