@@ -8,7 +8,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 
 from aquatlantis_ori import AquatlantisOriClient, AquatlantisOriError
-from custom_components.ori import async_setup_entry, async_unload_entry
+from custom_components.ori import async_setup_entry
 
 from . import get_mock_config_entry, setup_integration, unload_integration
 
@@ -21,7 +21,7 @@ async def test_setup_and_unload_entry(hass: HomeAssistant) -> None:
     assert isinstance(config_entry.runtime_data, AquatlantisOriClient)
 
     # Unload the entry
-    assert await async_unload_entry(hass, config_entry)
+    await unload_integration(hass, config_entry)
 
 
 async def test_setup_entry_exception(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock) -> None:
@@ -38,7 +38,7 @@ async def test_setup_entry_exception(hass: HomeAssistant, mock_aquatlantis_clien
         await async_setup_entry(hass, config_entry)
 
 
-async def test_setup_entry_timeour_exception(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock, caplog: LogCaptureFixture) -> None:
+async def test_setup_entry_timeout_exception(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock, caplog: LogCaptureFixture) -> None:
     """Test setup entry does not raise exception on timeout."""
     # Configure the mock to simulate a timeout
     mock_aquatlantis_client.connect.side_effect = TimeoutError("Connection timed out")
