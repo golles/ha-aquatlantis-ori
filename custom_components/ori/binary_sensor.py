@@ -39,9 +39,9 @@ DESCRIPTIONS: list[OriBinarySensorEntityDescription] = [
         key="water_temperature_problem",
         translation_key="water_temperature_problem",
         device_class=BinarySensorDeviceClass.PROBLEM,
-        available_fn=lambda device: device.status == StatusType.ONLINE
-        and device.sensor_valid == SensorValidType.VALID
-        and device.water_temperature_thresholds is not None,
+        available_fn=lambda device: (
+            device.status == StatusType.ONLINE and device.sensor_valid == SensorValidType.VALID and device.water_temperature_thresholds is not None
+        ),
         value_fn=lambda device: (
             True
             if device.water_temperature_thresholds is None or device.water_temperature is None
