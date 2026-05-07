@@ -59,3 +59,20 @@ async def test_sensor_no_temperature(hass: HomeAssistant, mock_aquatlantis_clien
     assert hass.states.get("sensor.offline_device_water_temperature") is None
 
     await unload_integration(hass, config_entry)
+
+
+@pytest.mark.usefixtures("enable_all_entities")
+async def test_sensors_available_with_live_mqtt_and_stale_http_offline(
+    hass: HomeAssistant, mock_aquatlantis_client: AsyncMock
+) -> None:
+    """Test sensors stay available when MQTT telemetry is live but HTTP status is stale offline."""
+    device = create_test_device({"status": 0})
+    device.availability_state = 2
+    mock_aquatlantis_client.get_devices.return_value = [device]
+
+    config_entry = await setup_integration(hass)
+
+    check_state_value(hass, "sensor.test_device_water_temperature", "25.0")
+    check_state_value(hass, "sensor.test_device_wifi_signal", "-70")
+
+    await unload_integration(hass, config_entry)

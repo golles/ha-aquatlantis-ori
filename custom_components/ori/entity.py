@@ -17,6 +17,22 @@ from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
+AVAILABLE_STATE_NAME = "AVAILABLE"
+
+
+def is_device_available(device: Device) -> bool:
+    """Return the effective device availability.
+
+    Prefer the derived availability exposed by newer python-aquatlantis-ori
+    versions, but keep compatibility with older releases that only expose the
+    raw status field.
+    """
+    availability_state = getattr(device, "availability_state", None)
+    if availability_state is not None:
+        return getattr(availability_state, "name", None) == AVAILABLE_STATE_NAME
+
+    return device.status == StatusType.ONLINE
+
 
 @dataclass(kw_only=True, frozen=True)
 class OriEntityDescription(EntityDescription):
@@ -62,7 +78,7 @@ class OriEntity(Entity):
     @property
     def available(self) -> bool:
         """Return True if entity is available."""
-        return self._device.status == StatusType.ONLINE and self.entity_description.available_fn(self._device)
+        return is_device_available(self._device) and self.entity_description.available_fn(self._device)
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
