@@ -18,6 +18,7 @@ from .const import DOMAIN
 _LOGGER = logging.getLogger(__name__)
 
 AVAILABLE_STATE_NAME = "AVAILABLE"
+AVAILABLE_STATE_VALUE = 2
 
 
 def is_device_available(device: Device) -> bool:
@@ -29,7 +30,10 @@ def is_device_available(device: Device) -> bool:
     """
     availability_state = getattr(device, "availability_state", None)
     if availability_state is not None:
-        return getattr(availability_state, "name", None) == AVAILABLE_STATE_NAME
+        if getattr(availability_state, "name", None) == AVAILABLE_STATE_NAME:
+            return True
+
+        return getattr(availability_state, "value", availability_state) == AVAILABLE_STATE_VALUE
 
     return device.status == StatusType.ONLINE
 
