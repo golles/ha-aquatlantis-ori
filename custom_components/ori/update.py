@@ -62,10 +62,8 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class OriUpdate(OriEntity, UpdateEntity):
+class OriUpdate(OriEntity[OriUpdateEntityDescription], UpdateEntity):
     """Representation of a Aquatlantis Ori update entity."""
-
-    entity_description: OriUpdateEntityDescription
 
     @property
     def installed_version(self) -> str | None:

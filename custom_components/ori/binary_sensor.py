@@ -87,18 +87,16 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class OriBinarySensor(OriEntity, BinarySensorEntity):
+class OriBinarySensor(OriEntity[OriBinarySensorEntityDescription], BinarySensorEntity):
     """Representation of a Aquatlantis Ori binary sensor."""
-
-    entity_description: OriBinarySensorEntityDescription
 
     @property
     def is_on(self) -> bool:
         """Return true if the binary sensor is on."""
-        return self.entity_description.value_fn(self._device)
+        return self.description.value_fn(self._device)
 
     @property
     def available(self) -> bool:
         """Return True if entity is available."""
         # Handle the case locally so the connectivity sensor is always available.
-        return self.entity_description.available_fn(self._device)
+        return self.description.available_fn(self._device)
