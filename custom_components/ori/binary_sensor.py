@@ -12,9 +12,9 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
-from aquatlantis_ori import AquatlantisOriClient, Device, SensorType, SensorValidType
+from aquatlantis_ori import AquatlantisOriClient, AvailabilityType, Device, SensorType, SensorValidType
 
-from .entity import OriEntity, OriEntityDescription, is_device_available
+from .entity import OriEntity, OriEntityDescription
 
 PARALLEL_UPDATES = 0
 SCAN_INTERVAL = timedelta(seconds=10)
@@ -33,14 +33,14 @@ DESCRIPTIONS: list[OriBinarySensorEntityDescription] = [
         translation_key="status",
         entity_category=EntityCategory.DIAGNOSTIC,
         device_class=BinarySensorDeviceClass.CONNECTIVITY,
-        value_fn=is_device_available,
+        value_fn=lambda device: device.availability_state == AvailabilityType.AVAILABLE,
     ),
     OriBinarySensorEntityDescription(
         key="water_temperature_problem",
         translation_key="water_temperature_problem",
         device_class=BinarySensorDeviceClass.PROBLEM,
         available_fn=lambda device: (
-            is_device_available(device)
+            device.availability_state == AvailabilityType.AVAILABLE
             and device.sensor_valid == SensorValidType.VALID
             and device.water_temperature_thresholds is not None
         ),

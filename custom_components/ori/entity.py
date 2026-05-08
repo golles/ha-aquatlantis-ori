@@ -11,31 +11,11 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.device_registry import CONNECTION_NETWORK_MAC, DeviceInfo
 from homeassistant.helpers.entity import Entity, EntityDescription
 
-from aquatlantis_ori import AquatlantisOriClient, Device, StatusType
+from aquatlantis_ori import AquatlantisOriClient, AvailabilityType, Device
 
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
-
-AVAILABLE_STATE_NAME = "AVAILABLE"
-AVAILABLE_STATE_VALUE = 2
-
-
-def is_device_available(device: Device) -> bool:
-    """Return the effective device availability.
-
-    Prefer the derived availability exposed by newer python-aquatlantis-ori
-    versions, but keep compatibility with older releases that only expose the
-    raw status field.
-    """
-    availability_state = getattr(device, "availability_state", None)
-    if availability_state is not None:
-        if getattr(availability_state, "name", None) == AVAILABLE_STATE_NAME:
-            return True
-
-        return getattr(availability_state, "value", availability_state) == AVAILABLE_STATE_VALUE
-
-    return device.status == StatusType.ONLINE
 
 
 @dataclass(kw_only=True, frozen=True)
@@ -82,7 +62,7 @@ class OriEntity(Entity):
     @property
     def available(self) -> bool:
         """Return True if entity is available."""
-        return is_device_available(self._device) and self.entity_description.available_fn(self._device)
+        return self._device.availability_state == AvailabilityType.AVAILABLE and self.entity_description.available_fn(self._device)
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:

@@ -343,8 +343,8 @@ wheels = [
 
 [[package]]
 name = "aquatlantis-ori"
-version = "0.0.13"
-source = { registry = "https://pypi.org/simple" }
+version = "0.0.1"
+source = { url = "https://github.com/golles/python-aquatlantis-ori/archive/refs/pull/232/head.zip" }
 dependencies = [
     { name = "aiohttp", version = "3.13.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.14.2'" },
     { name = "aiohttp", version = "3.13.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.14.2'" },
@@ -353,9 +353,14 @@ dependencies = [
     { name = "orjson", version = "3.11.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.14.2'" },
     { name = "paho-mqtt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/35/7c/eda4068c0370fb4efdfb3cce1876e6f0c89b79559341925191e8132fb4d6/aquatlantis_ori-0.0.13.tar.gz", hash = "sha256:6f493e63eab8b13e6d8a6f60a4463376702df9473a026d7f1fa83a77d97b35d3", size = 77508, upload-time = "2025-10-05T13:06:34.987Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/17/51/00d65ab18c6f3b10560dccff5c813c58619759169e3416e6bf1065ed60b9/aquatlantis_ori-0.0.13-py3-none-any.whl", hash = "sha256:8a0adf4c403a59fee2712ae143c5930adc0ba42e9e41ab13cbc4c59df9bb4270", size = 19340, upload-time = "2025-10-05T13:06:33.814Z" },
+sdist = { hash = "sha256:9236a4a8e2371cde5f57f0dd7ffde37d32a2d7cf3d3916a9d5c1ea9f8c885aba" }
+
+[package.metadata]
+requires-dist = [
+    { name = "aiohttp", specifier = ">=3.12.0" },
+    { name = "mashumaro", specifier = ">=3.16" },
+    { name = "orjson", specifier = ">=3.10.0" },
+    { name = "paho-mqtt", specifier = ">=2.1.0" },
 ]
 
 [[package]]
@@ -1195,7 +1200,7 @@ runhass = [
 
 [package.metadata]
 requires-dist = [
-    { name = "aquatlantis-ori", specifier = "==0.0.13" },
+    { name = "aquatlantis-ori", url = "https://github.com/golles/python-aquatlantis-ori/archive/refs/pull/232/head.zip" },
     { name = "homeassistant", specifier = ">=2025.7.0" },
 ]
 

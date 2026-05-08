@@ -45,12 +45,9 @@ async def test_binary_sensors_no_device(hass: HomeAssistant) -> None:
 
 
 @pytest.mark.usefixtures("enable_all_entities")
-async def test_binary_sensors_available_with_live_mqtt_and_stale_http_offline(
-    hass: HomeAssistant, mock_aquatlantis_client: AsyncMock
-) -> None:
+async def test_binary_sensors_available_with_live_mqtt_and_stale_http_offline(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock) -> None:
     """Test connectivity uses derived availability when HTTP status is stale offline."""
     device = create_test_device({"status": 0})
-    device.availability_state = 2
     mock_aquatlantis_client.get_devices.return_value = [device]
 
     config_entry = await setup_integration(hass)
