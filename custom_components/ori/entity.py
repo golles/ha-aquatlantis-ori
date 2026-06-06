@@ -5,7 +5,6 @@ from __future__ import annotations
 import logging
 from collections.abc import Callable
 from dataclasses import dataclass
-from functools import cached_property
 from typing import Any, cast
 
 from homeassistant.config_entries import ConfigEntry
@@ -63,12 +62,12 @@ class OriEntity[DescriptionT: OriEntityDescription](Entity):
         """Return the typed entity description."""
         return cast(DescriptionT, self.entity_description)
 
-    @cached_property
+    @property
     def available(self) -> bool:
         """Return True if entity is available."""
         return self._device.availability_state == AvailabilityType.AVAILABLE and self.description.available_fn(self._device)
 
-    @cached_property
+    @property
     def extra_state_attributes(self) -> dict[str, Any]:
         """Return entity specific state attributes."""
         return self.description.state_attributes_fn(self._device)

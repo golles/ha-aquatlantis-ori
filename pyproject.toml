@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "aquatlantis_ori @ https://github.com/golles/python-aquatlantis-ori/archive/refs/pull/232/head.zip",
+    "aquatlantis_ori==0.0.14",
     "homeassistant>=2025.7.0",
 ]
 
@@ -57,9 +57,6 @@ source = ["custom_components/ori"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["custom_components/ori"]
-
-[tool.hatch.metadata]
-allow-direct-references = true
 
 [tool.mypy]
 python_version = "3.14"
