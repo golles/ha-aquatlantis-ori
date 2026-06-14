@@ -32,6 +32,9 @@ npm run prettier -- --write . # Format JSON/YAML
 
 # Run all CI checks locally (requires jq and yq)
 ./scripts/local_ci_checks.sh
+
+# Run Home Assistant locally against ./config for manual testing
+./scripts/develop.sh
 ```
 
 Python version: **3.14** (enforced in `pyproject.toml`).
@@ -60,7 +63,7 @@ All entities follow the same descriptor pattern:
   - `is_supported_fn(device)` — filters which entities get created per device
   - `state_attributes_fn(device)` — returns extra state attributes dict
 
-- `OriEntity` base class stores `_device: Device` and `_config_entry`. The `available` property checks `device.status == StatusType.ONLINE`.
+- `OriEntity` base class stores `_device: Device` and `_config_entry`. The `available` property requires `device.availability_state == AvailabilityType.AVAILABLE` **and** the description's `available_fn(device)`.
 
 Each platform defines a `DESCRIPTIONS` list of platform-specific entity description subclasses (e.g., `OriLightEntityDescription`) and iterates over `client.get_devices()` to create entities, filtering with `is_supported_fn`.
 
