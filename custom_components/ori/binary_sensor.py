@@ -12,7 +12,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
-from aquatlantis_ori import AquatlantisOriClient, Device, SensorType, SensorValidType, StatusType
+from aquatlantis_ori import AquatlantisOriClient, AvailabilityType, Device, SensorType, SensorValidType
 
 from .entity import OriEntity, OriEntityDescription
 
@@ -33,14 +33,16 @@ DESCRIPTIONS: list[OriBinarySensorEntityDescription] = [
         translation_key="status",
         entity_category=EntityCategory.DIAGNOSTIC,
         device_class=BinarySensorDeviceClass.CONNECTIVITY,
-        value_fn=lambda device: device.status == StatusType.ONLINE,
+        value_fn=lambda device: device.availability_state == AvailabilityType.AVAILABLE,
     ),
     OriBinarySensorEntityDescription(
         key="water_temperature_problem",
         translation_key="water_temperature_problem",
         device_class=BinarySensorDeviceClass.PROBLEM,
         available_fn=lambda device: (
-            device.status == StatusType.ONLINE and device.sensor_valid == SensorValidType.VALID and device.water_temperature_thresholds is not None
+            device.availability_state == AvailabilityType.AVAILABLE
+            and device.sensor_valid == SensorValidType.VALID
+            and device.water_temperature_thresholds is not None
         ),
         value_fn=lambda device: (
             True
@@ -85,18 +87,16 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class OriBinarySensor(OriEntity, BinarySensorEntity):
+class OriBinarySensor(OriEntity[OriBinarySensorEntityDescription], BinarySensorEntity):
     """Representation of a Aquatlantis Ori binary sensor."""
-
-    entity_description: OriBinarySensorEntityDescription
 
     @property
     def is_on(self) -> bool:
         """Return true if the binary sensor is on."""
-        return self.entity_description.value_fn(self._device)
+        return self.description.value_fn(self._device)
 
     @property
     def available(self) -> bool:
         """Return True if entity is available."""
         # Handle the case locally so the connectivity sensor is always available.
-        return self.entity_description.available_fn(self._device)
+        return self.description.available_fn(self._device)

@@ -5,13 +5,13 @@ from __future__ import annotations
 import logging
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, cast
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.device_registry import CONNECTION_NETWORK_MAC, DeviceInfo
 from homeassistant.helpers.entity import Entity, EntityDescription
 
-from aquatlantis_ori import AquatlantisOriClient, Device, StatusType
+from aquatlantis_ori import AquatlantisOriClient, AvailabilityType, Device
 
 from .const import DOMAIN
 
@@ -28,17 +28,15 @@ class OriEntityDescription(EntityDescription):
     state_attributes_fn: Callable[[Device], dict[str, Any]] = lambda _: {}
 
 
-class OriEntity(Entity):
+class OriEntity[DescriptionT: OriEntityDescription](Entity):
     """Representation of a Aquatlantis Ori entity."""
-
-    entity_description: OriEntityDescription
 
     _attr_has_entity_name = True
 
     def __init__(
         self,
         config_entry: ConfigEntry[AquatlantisOriClient],
-        description: OriEntityDescription,
+        description: DescriptionT,
         device: Device,
     ) -> None:
         """Initialize the Aquatlantis Ori entity."""
@@ -60,11 +58,16 @@ class OriEntity(Entity):
         )
 
     @property
+    def description(self) -> DescriptionT:
+        """Return the typed entity description."""
+        return cast(DescriptionT, self.entity_description)
+
+    @property
     def available(self) -> bool:
         """Return True if entity is available."""
-        return self._device.status == StatusType.ONLINE and self.entity_description.available_fn(self._device)
+        return self._device.availability_state == AvailabilityType.AVAILABLE and self.description.available_fn(self._device)
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
         """Return entity specific state attributes."""
-        return self.entity_description.state_attributes_fn(self._device)
+        return self.description.state_attributes_fn(self._device)

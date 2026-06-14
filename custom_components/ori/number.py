@@ -114,16 +114,14 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class OriNumber(OriEntity, NumberEntity):
+class OriNumber(OriEntity[OriNumberDescription], NumberEntity):
     """Representation of a Aquatlantis Ori number entity."""
-
-    entity_description: OriNumberDescription
 
     @property
     def native_value(self) -> float | None:
         """Return the value reported by the number."""
-        return self.entity_description.value_fn(self._device)
+        return self.description.value_fn(self._device)
 
     def set_native_value(self, value: float) -> None:
         """Set new value."""
-        self.entity_description.set_fn(self._device, int(value))
+        self.description.set_fn(self._device, int(value))

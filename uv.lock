@@ -237,7 +237,7 @@ wheels = [
 
 [[package]]
 name = "aquatlantis-ori"
-version = "0.0.13"
+version = "0.0.14"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -245,9 +245,9 @@ dependencies = [
     { name = "orjson" },
     { name = "paho-mqtt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/35/7c/eda4068c0370fb4efdfb3cce1876e6f0c89b79559341925191e8132fb4d6/aquatlantis_ori-0.0.13.tar.gz", hash = "sha256:6f493e63eab8b13e6d8a6f60a4463376702df9473a026d7f1fa83a77d97b35d3", size = 77508, upload-time = "2025-10-05T13:06:34.987Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1a/f1/a912400e3265a7205b99b2d8c77f1bde63bd4cd14a67557cb21f5df978d8/aquatlantis_ori-0.0.14.tar.gz", hash = "sha256:12621d5cfa518b6b10c5086e46d689b6c7c6e7d0cd50d29c050efef0050ed2f0", size = 92292, upload-time = "2026-06-06T11:00:55.323Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/17/51/00d65ab18c6f3b10560dccff5c813c58619759169e3416e6bf1065ed60b9/aquatlantis_ori-0.0.13-py3-none-any.whl", hash = "sha256:8a0adf4c403a59fee2712ae143c5930adc0ba42e9e41ab13cbc4c59df9bb4270", size = 19340, upload-time = "2025-10-05T13:06:33.814Z" },
+    { url = "https://files.pythonhosted.org/packages/29/0c/b7b97b415084eb294c6435713298c0fd7bdbafce69023ff9452f96ba7ce6/aquatlantis_ori-0.0.14-py3-none-any.whl", hash = "sha256:180c068973391594555e7b6cf78b0c5b684ca9da53b76fcd1c7eef80ff399410", size = 20387, upload-time = "2026-06-06T11:00:54.015Z" },
 ]
 
 [[package]]
@@ -1029,7 +1029,7 @@ runhass = [
 
 [package.metadata]
 requires-dist = [
-    { name = "aquatlantis-ori", specifier = "==0.0.13" },
+    { name = "aquatlantis-ori", specifier = "==0.0.14" },
     { name = "homeassistant", specifier = ">=2025.7.0" },
 ]
 

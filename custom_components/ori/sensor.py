@@ -120,12 +120,10 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class OriSensor(OriEntity, SensorEntity):
+class OriSensor(OriEntity[OriSensorEntityDescription], SensorEntity):
     """Representation of a Aquatlantis Ori sensor."""
-
-    entity_description: OriSensorEntityDescription
 
     @property
     def native_value(self) -> StateType | datetime:
         """Return the value reported by the sensor."""
-        return self.entity_description.value_fn(self._device)
+        return self.description.value_fn(self._device)

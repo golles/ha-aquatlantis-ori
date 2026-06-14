@@ -104,12 +104,10 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class OriButton(OriEntity, ButtonEntity):
+class OriButton(OriEntity[OriButtonEntityDescription], ButtonEntity):
     """Representation of a Aquatlantis Ori button."""
-
-    entity_description: OriButtonEntityDescription
 
     def press(self) -> None:
         """Handle the button press."""
-        _LOGGER.info("Pressing button %s on device %s", self.entity_description.key, self._device.devid)
-        self.entity_description.press_fn(self._device)
+        _LOGGER.info("Pressing button %s on device %s", self.description.key, self._device.devid)
+        self.description.press_fn(self._device)

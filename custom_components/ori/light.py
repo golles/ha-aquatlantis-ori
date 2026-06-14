@@ -115,15 +115,13 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-class OriLightEntity(OriEntity, LightEntity):
+class OriLightEntity(OriEntity[OriLightEntityDescription], LightEntity):
     """Representation of a Aquatlantis Ori light."""
-
-    entity_description: OriLightEntityDescription
 
     def __init__(
         self,
         config_entry: ConfigEntry[AquatlantisOriClient],
-        description: OriEntityDescription,
+        description: OriLightEntityDescription,
         device: Device,
     ) -> None:
         """Initialize light."""
@@ -133,7 +131,7 @@ class OriLightEntity(OriEntity, LightEntity):
 
     def turn_on(self, **kwargs: Any) -> None:  # noqa: ANN401
         """Turn the entity on."""
-        _LOGGER.info("Turning on, or changing light %s on device %s", self.entity_description.key, self._device.devid)
+        _LOGGER.info("Turning on, or changing light %s on device %s", self.description.key, self._device.devid)
         options = LightOptions()
 
         if ATTR_EFFECT in kwargs:
@@ -163,7 +161,7 @@ class OriLightEntity(OriEntity, LightEntity):
 
     def turn_off(self, **_kwargs: Any) -> None:  # noqa: ANN401
         """Turn the entity off."""
-        _LOGGER.info("Turning off light %s on device %s", self.entity_description.key, self._device.devid)
+        _LOGGER.info("Turning off light %s on device %s", self.description.key, self._device.devid)
         self._device.set_mode(ModeType.MANUAL)
         self._device.set_power(PowerType.OFF)
 
@@ -173,7 +171,7 @@ class OriLightEntity(OriEntity, LightEntity):
         return _effect_name(self._device)
 
     @property
-    def color_mode(self) -> ColorMode | str | None:
+    def color_mode(self) -> ColorMode | None:
         """Return the color mode of the light."""
         if self._device.mode == ModeType.AUTOMATIC or self._device.dynamic_mode == DynamicModeType.ON:
             # If the device is in automatic mode or dynamic mode is on, it only supports ON/OFF
@@ -181,7 +179,7 @@ class OriLightEntity(OriEntity, LightEntity):
         return ColorMode.RGBW
 
     @property
-    def supported_color_modes(self) -> set[ColorMode] | set[str] | None:
+    def supported_color_modes(self) -> set[ColorMode] | None:
         """Flag supported color modes."""
         if self._device.mode == ModeType.AUTOMATIC or self._device.dynamic_mode == DynamicModeType.ON:
             # If the device is in automatic mode or dynamic mode is on, it only supports ON/OFF
