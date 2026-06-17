@@ -24,13 +24,13 @@ async def test_buttons(hass: HomeAssistant, mock_aquatlantis_client: AsyncMock) 
         hass,
         "button.test_device_preset_1",
         "unknown",
-        {"intensity": 75, "red": 255, "green": 128, "blue": 64, "white": 200},
+        {"intensity": 75, "red": 90, "green": 50, "blue": 64, "white": 80},
     )
     check_state_value(
         hass,
         "button.test_device_preset_2",
         "unknown",
-        {"intensity": 50, "red": 200, "green": 100, "blue": 50, "white": 150},
+        {"intensity": 50, "red": 80, "green": 100, "blue": 50, "white": 90},
     )
     check_state_value(
         hass,
