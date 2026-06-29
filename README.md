@@ -155,7 +155,7 @@ target:
   entity_id: light.aquarium_light
 data:
   brightness_pct: 80
-  rgbw_color: [0, 0, 0, 255]  # Pure white
+  rgbw_color: [0, 0, 0, 255] # Pure white
 
 # Set custom color (purple)
 action: light.turn_on
@@ -163,7 +163,7 @@ target:
   entity_id: light.aquarium_light
 data:
   brightness_pct: 60
-  rgbw_color: [128, 0, 128, 0]  # Purple
+  rgbw_color: [128, 0, 128, 0] # Purple
 
 # Turn off the light
 action: light.turn_off
