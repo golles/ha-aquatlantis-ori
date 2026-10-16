@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 import re
 
-import voluptuous as vol
+import probatio
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import ATTR_DEVICE_ID
 from homeassistant.core import HomeAssistant, ServiceCall, callback
@@ -22,10 +22,10 @@ _LOGGER = logging.getLogger(__name__)
 ATTR_SCHEDULE = "schedule"
 
 SERVICE_SET_SCHEDULE = "set_schedule"
-SERVICE_SET_SCHEDULE_SCHEMA = vol.Schema(
+SERVICE_SET_SCHEDULE_SCHEMA = probatio.Schema(
     {
-        vol.Required(ATTR_DEVICE_ID): str,
-        vol.Required(ATTR_SCHEDULE): TextSelector(TextSelectorConfig(multiple=True)),
+        probatio.Required(ATTR_DEVICE_ID): str,
+        probatio.Required(ATTR_SCHEDULE): TextSelector(TextSelectorConfig(multiple=True)),
     }
 )
 
