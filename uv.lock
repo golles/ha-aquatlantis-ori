@@ -955,7 +955,7 @@ runhass = [
 [package.metadata]
 requires-dist = [
     { name = "aquatlantis-ori", specifier = "==0.0.15" },
-    { name = "homeassistant", specifier = ">=2025.7.0" },
+    { name = "homeassistant", specifier = ">=2026.10.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -1826,12 +1826,42 @@ wheels = [
 
 [[package]]
 name = "pycares"
-version = "5.1.0"
+version = "5.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cffi" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3f/b9/8f8389df1dfe3c9f6b5b02cfab60781685d146bee529e7628b77a1df7e9c/pycares-5.1.0.tar.gz", hash = "sha256:4ae0712df072773a3193b23f124d9458d6b2054a22c9ea0059c9dff6b8f91050", size = 674882, upload-time = "2026-10-05T09:19:05.662Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e1/16/66c5e0498934011d36887d69ce116e347253399d06931a6ca900c7cc0899/pycares-5.2.0.tar.gz", hash = "sha256:90ea74fe26593d2c4e79e1ac4dcdff4a2434b183ec6feef0524e4874a7d307ef", size = 675045, upload-time = "2026-10-14T07:33:23.827Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1a/d7/8dd7c5d9adbedb58bd8b30f18da2ef62796e2adfd98bb647c8791c2fc2fa/pycares-5.2.0-cp315-cp315-macosx_10_15_x86_64.whl", hash = "sha256:5aae750d21fecc3302bbbd851fe85d4b12f4e89d4ad67a3b53cbf121b041bab8", size = 137993, upload-time = "2026-10-14T07:32:52.693Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/46/a484523995bce7fa2b067988f183b3c9ec45608136ed9340adc92a3e5b35/pycares-5.2.0-cp315-cp315-macosx_11_0_arm64.whl", hash = "sha256:b5b0dbe4935e4552a75d905d3421fe64bf37089a10dbd1b132135b963d950bd3", size = 132886, upload-time = "2026-10-14T07:32:53.708Z" },
+    { url = "https://files.pythonhosted.org/packages/bb/8a/74038a2294a541cb7322e9c204e53dba9f656caaa68ba171dd1422a42662/pycares-5.2.0-cp315-cp315-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:db9c9b315780f9f2f63c9783d5438bc3ffe79558560044a45856aff67b10a3d8", size = 222979, upload-time = "2026-10-14T07:32:54.655Z" },
+    { url = "https://files.pythonhosted.org/packages/49/51/4746b7e46350eb3abc6d39f89727313e20549f25dea2bac11776e5253ea7/pycares-5.2.0-cp315-cp315-manylinux_2_26_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:170095b98b66c8ab05937d7d8c136014b5e2852b16c8d4545a034e1670f06b72", size = 255102, upload-time = "2026-10-14T07:32:55.668Z" },
+    { url = "https://files.pythonhosted.org/packages/6e/54/b6adde1ee1c61b4d7006fb20ab290f32c374fdd0c4196d469fff5714ed02/pycares-5.2.0-cp315-cp315-manylinux_2_26_s390x.manylinux_2_28_s390x.whl", hash = "sha256:0fc1aab1292c0a32b6a44abaaf18c85cc832f3c55174fd44386f07e6017468a6", size = 242465, upload-time = "2026-10-14T07:32:56.832Z" },
+    { url = "https://files.pythonhosted.org/packages/1b/c7/a6b4cf0c91d9a92a33ae6838359afa7747f6e2f7a5b8acd4480463d9d67b/pycares-5.2.0-cp315-cp315-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:90101c8f3f22c7901e6e36621b7b3133a34b1ba24739e72059824d0cd16b0053", size = 225981, upload-time = "2026-10-14T07:32:57.928Z" },
+    { url = "https://files.pythonhosted.org/packages/43/07/467ae7afcf544ce27da0d04465192e002e4f1d36d2b326471e6c032a4895/pycares-5.2.0-cp315-cp315-manylinux_2_38_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:9433dcec229214d62ecf6df1bc311b3d9a369e15e340eca74d8b563c65b4d6eb", size = 224139, upload-time = "2026-10-14T07:32:59.029Z" },
+    { url = "https://files.pythonhosted.org/packages/55/7b/cedcba549d08a50fefaa8f04352db2069bcbb99b5e3ceec1e9f68dee037d/pycares-5.2.0-cp315-cp315-musllinux_1_2_aarch64.whl", hash = "sha256:ee113a092da089d9267da948642b4fc7858a27f1116a4f40eecbd31159635878", size = 225640, upload-time = "2026-10-14T07:33:00.192Z" },
+    { url = "https://files.pythonhosted.org/packages/5c/0e/e97335d62fb769b586e2b9eed5f5e6d57a3bbff2dd694db56687b1074058/pycares-5.2.0-cp315-cp315-musllinux_1_2_ppc64le.whl", hash = "sha256:efccfb8164b68cf56844f104abf41c192c672fecb4bbe9dac590c2f9323742a3", size = 255086, upload-time = "2026-10-14T07:33:01.271Z" },
+    { url = "https://files.pythonhosted.org/packages/06/4a/436a3d56686f2773f3e425965373d8d5ee38e52a55ecc84d6cc213318018/pycares-5.2.0-cp315-cp315-musllinux_1_2_riscv64.whl", hash = "sha256:1af677cbbf16b5ce791cb9717746e8ce792d0f371911a8f08189821827d03b41", size = 223469, upload-time = "2026-10-14T07:33:02.528Z" },
+    { url = "https://files.pythonhosted.org/packages/22/42/17450a6d8ea23a7b0deddc12e7bc297705bfedcaa217ac421bb3dba514e4/pycares-5.2.0-cp315-cp315-musllinux_1_2_s390x.whl", hash = "sha256:26a1832efe501ad06f29dec6db81f0ea03777e37de85754fcd8e75aaae032497", size = 240768, upload-time = "2026-10-14T07:33:03.564Z" },
+    { url = "https://files.pythonhosted.org/packages/90/77/8d9389bb4087530bc368fb0089ea8ae1971da2c73b5ec4a63d4463878e4b/pycares-5.2.0-cp315-cp315-musllinux_1_2_x86_64.whl", hash = "sha256:ff63d44ae0950f7241b11ff9495f601666d0bbfa68a6d40e1df042b3bd3175fd", size = 226414, upload-time = "2026-10-14T07:33:04.982Z" },
+    { url = "https://files.pythonhosted.org/packages/df/9a/e3a6f9f49a311b93b9a937f68246cac5bdddad1b78e449208a8d4a762301/pycares-5.2.0-cp315-cp315-win_amd64.whl", hash = "sha256:0e376defc9fb73792a59123eea6d4964c14b91b1e29aa74fb0c40a1510eb9ff8", size = 121427, upload-time = "2026-10-14T07:33:05.951Z" },
+    { url = "https://files.pythonhosted.org/packages/40/f5/b730435ae40afd8ad4cfb031f9537a24f909f048913f6b02913189034999/pycares-5.2.0-cp315-cp315-win_arm64.whl", hash = "sha256:c9a79f149176fd5a4969511b17e6c8de5940e01a15e67bdfff283de52a7b2363", size = 117832, upload-time = "2026-10-14T07:33:06.924Z" },
+    { url = "https://files.pythonhosted.org/packages/3d/27/bfee6a6c5fd4f44c02f9b134644b240834547653a6259cd7464d354f5b39/pycares-5.2.0-cp315-cp315t-macosx_10_15_x86_64.whl", hash = "sha256:2b561fa62a8a072cdc82ca0bb90f973b3c1a47c1331f33d9bc6ecf9f7ee3051f", size = 138071, upload-time = "2026-10-14T07:33:07.979Z" },
+    { url = "https://files.pythonhosted.org/packages/0d/31/ce2cc57519eabc617fd5d71e083c1c5821a91bf538a1699aedebfea54356/pycares-5.2.0-cp315-cp315t-macosx_11_0_arm64.whl", hash = "sha256:81a85ac8b599adaf2f9b282deed624e6ffaa94d9d96fc229dc20be83e5703e8c", size = 132981, upload-time = "2026-10-14T07:33:09.041Z" },
+    { url = "https://files.pythonhosted.org/packages/05/8a/f44d431562893c4c6e3e5b07e31529acb46af22bc9c04186b4103c310a0a/pycares-5.2.0-cp315-cp315t-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:94dedafdbdfb7e4ddf5f248927f8e7cb82384a7b3c5ea18f753293b7416288b4", size = 222876, upload-time = "2026-10-14T07:33:10.043Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/c7/a97e81790c5583b6c591b35276661fd358962828c8f544d200b9e57584ca/pycares-5.2.0-cp315-cp315t-manylinux_2_26_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:ee1752078ecb294bd597fc3b2116e3d03292322898136a113c20ec5f97435247", size = 255093, upload-time = "2026-10-14T07:33:11.145Z" },
+    { url = "https://files.pythonhosted.org/packages/09/92/b53302accbf11629329f4080ff1f360f5b14d28d64f49737ba4a80ea2ecc/pycares-5.2.0-cp315-cp315t-manylinux_2_26_s390x.manylinux_2_28_s390x.whl", hash = "sha256:470588a154e7c10c3ae81d051ef1de6b7e08dd3fd883a116b18296a37bf981fa", size = 242021, upload-time = "2026-10-14T07:33:12.366Z" },
+    { url = "https://files.pythonhosted.org/packages/ee/2e/395764d15c8b6c72978308d016240f1ae79aa2df1383d8de7454b439f94d/pycares-5.2.0-cp315-cp315t-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c8701ae8243df38bda772b749209801d5ad782028393322a1563d8b413bc9e61", size = 226014, upload-time = "2026-10-14T07:33:13.415Z" },
+    { url = "https://files.pythonhosted.org/packages/e7/01/d355785b881613e84d844a9f256cf7b987528effbd18e48f45f29ba48cd8/pycares-5.2.0-cp315-cp315t-manylinux_2_38_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:e0c92d7dfa621e09e6780a194c11f7ab414ec83d592d8f661000aa7f8f7993dd", size = 224006, upload-time = "2026-10-14T07:33:14.503Z" },
+    { url = "https://files.pythonhosted.org/packages/26/0d/62371671d13beec09ae5b38deb39680814f8aec90709f3d9be09639866a7/pycares-5.2.0-cp315-cp315t-musllinux_1_2_aarch64.whl", hash = "sha256:f2830cb29a4b7a7a283517616d95d52e2a6a84a84fb4bbb6a79542186dcf6fc4", size = 225642, upload-time = "2026-10-14T07:33:15.624Z" },
+    { url = "https://files.pythonhosted.org/packages/b2/76/e0b20373db3ac7b33908c33bc67003478022780592e0adc872326c8184f6/pycares-5.2.0-cp315-cp315t-musllinux_1_2_ppc64le.whl", hash = "sha256:6b0f858fdcafa5efefce079fcb0ab96bb0bcc01d9aa234e0feacf28b727b8e47", size = 255033, upload-time = "2026-10-14T07:33:16.741Z" },
+    { url = "https://files.pythonhosted.org/packages/b2/d7/76d65c44e1652c345ad4803456bb5d28b1946fa6e188133aa1f8e4561ba7/pycares-5.2.0-cp315-cp315t-musllinux_1_2_riscv64.whl", hash = "sha256:96b7c039aadcb51f92f8f7f60aa2911c7d3eb21c727dd68f2b98ea2dff7a4f04", size = 223288, upload-time = "2026-10-14T07:33:17.985Z" },
+    { url = "https://files.pythonhosted.org/packages/32/e7/9fc12437f00e1e360f14864d12f62982a6f2b05e0e86cbd1b9ff01cfdd89/pycares-5.2.0-cp315-cp315t-musllinux_1_2_s390x.whl", hash = "sha256:7550caaf2e941b96fdf276ed7142f2585d1201fde0fe3f81dfc143c9b5177bba", size = 240554, upload-time = "2026-10-14T07:33:19.069Z" },
+    { url = "https://files.pythonhosted.org/packages/6f/23/f69f1a4c50d76ccdd54c225f79699285c4b3e48c55806a6031d149c5b9dd/pycares-5.2.0-cp315-cp315t-musllinux_1_2_x86_64.whl", hash = "sha256:007b40a9b57a2d6432f88b4053aa127b17192691fc83d72c4dc067ff904371a5", size = 226176, upload-time = "2026-10-14T07:33:20.364Z" },
+    { url = "https://files.pythonhosted.org/packages/98/87/2434902679ae0c2dd75629192d22ba8e723585f63c456668cee3eb7d91c0/pycares-5.2.0-cp315-cp315t-win_amd64.whl", hash = "sha256:cae500acdde6edd6022a2cf6fdb16a5f16e840bc7dd1a18dda12e63292dd6052", size = 121475, upload-time = "2026-10-14T07:33:21.507Z" },
+    { url = "https://files.pythonhosted.org/packages/c0/f9/0f48d27c1efb82547885c4a78cb4798a8e83a127c1ce29a0d630abb45365/pycares-5.2.0-cp315-cp315t-win_arm64.whl", hash = "sha256:00c5c51d6f71d905a228f1ef3d7698a7c1920b5ec7f7a3273b647f6b5c8b1252", size = 117900, upload-time = "2026-10-14T07:33:22.735Z" },
+]
 
 [[package]]
 name = "pycognito"
