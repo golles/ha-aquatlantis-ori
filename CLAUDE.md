@@ -79,7 +79,7 @@ Color values are converted between HA's 0–255 range and the Ori API's 0–100 
 
 ### Testing
 
-Tests use `pytest-homeassistant-custom-component`. Key fixtures in `conftest.py`:
+Tests use `pytest-homeassistant`. Key fixtures in `conftest.py`:
 
 - `mock_aquatlantis_client` (autouse) — patches `AquatlantisOriClient` with an `AsyncMock`; override `mock_aquatlantis_client.get_devices.return_value` to inject test devices.
 - `enable_all_entities` — opt-in fixture that overrides `entity_registry_enabled_default` to `True` for testing disabled-by-default entities.
